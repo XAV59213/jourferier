@@ -2,7 +2,7 @@
 import logging
 from datetime import date
 from homeassistant.components.sensor import SensorEntity
-from .const import DOMAIN, SENSOR_NAME, SENSOR_UNIQUE_ID, HOLIDAYS, ATTR_HOLIDAY_NAME, ATTR_DATE
+from .const import DOMAIN, SENSOR_NAME, SENSOR_UNIQUE_ID, PUBLIC_HOLIDAYS_2025 as HOLIDAYS, ATTR_HOLIDAY_NAME, ATTR_DATE
 
 _LOGGER = logging.getLogger(__name__)
 

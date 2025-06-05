@@ -21,3 +21,6 @@ Vous pouvez appeler le service dans les outils de développement :
 
 ```yaml
 service: jourferier.create_card
+```
+
+Cela ajoutera automatiquement une carte de type `sensor` dans la première vue Lovelace.

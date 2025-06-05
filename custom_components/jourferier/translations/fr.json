@@ -1,0 +1,31 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Jour Férié",
+        "description": "Configurer le capteur pour les jours fériés."
+      }
+    },
+    "abort": {
+      "single_instance_only": "Une seule instance de cette intégration est autorisée."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "jour_ferie": {
+        "name": "Jour Férié",
+        "state": {
+          "Aucun": "Aucun jour férié"
+        },
+        "state_attributes": {
+          "holiday_name": {
+            "name": "Nom du jour férié"
+          },
+          "date": {
+            "name": "Date"
+          }
+        }
+      }
+    }
+  }
+}

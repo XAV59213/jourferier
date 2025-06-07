@@ -23,6 +23,12 @@
           },
           "date": {
             "name": "Date"
+          },
+          "next_holiday": {
+            "name": "Prochain jour férié"
+          },
+          "days_until": {
+            "name": "Jours restants"
           }
         }
       }

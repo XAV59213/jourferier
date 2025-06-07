@@ -2,7 +2,7 @@
   "name": "Jour Férié",
   "content_in_root": false,
   "filename": null,
-  "homeassistant": "2023.6.0",
+  "homeassistant": "2024.6.0",
   "render_readme": true,
   "country": ["FR"],
   "persistent_directory": []

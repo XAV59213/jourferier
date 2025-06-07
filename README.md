@@ -62,7 +62,7 @@ type: entity
 entity: sensor.jour_ferie
 name: Jour Férié
 icon: mdi:calendar-star
-
+```
 🧩 Service Lovelace
 
 Ajoutez une carte automatiquement en appelant ce service depuis les outils de développement :

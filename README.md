@@ -1,44 +1,27 @@
-our Férié
+# 🇫🇷 Jour Férié
 
-Une intégration Home Assistant qui affiche si aujourd'hui est un jour férié (France 2025).
+Une intégration Home Assistant pour savoir si **aujourd’hui est un jour férié en France** (année 2025).
 
-Fonctionnalités
+---
 
+## 📦 Fonctionnalités
 
+- 🗓️ Capteur `sensor.jour_ferie` indiquant :
+  - Le nom du jour férié, ou "Aucun"
+  - Le prochain jour férié
+  - Le nombre de jours restants
+- 🧩 Configuration via l’interface graphique (UI)
+- 🛠️ Service `jourferier.create_card` pour insérer automatiquement une carte Lovelace
 
+---
 
+## 🛠️ Installation
 
-Capteur sensor.jour_ferie avec le nom du jour férié ou "Aucun".
+### Via HACS (recommandé)
 
-
-
-Service jourferier.create_card pour insérer une carte dans le tableau de bord Lovelace.
-
-
-
-Configuration via l'interface utilisateur (UI).
-
-Installation
-
-
-
-
-
-Ajoutez ce dépôt comme dépôt personnalisé dans HACS.
-
-
-
-Installez l'intégration Jour Férié.
-
-
-
-Redémarrez Home Assistant.
-
-
-
-Ajoutez l'intégration via l'interface utilisateur :
-
-
+1. Allez dans **HACS > Intégrations**
+2. Cliquez sur les **trois points > Dépôt personnalisé**
+3. Ajoutez ce dépôt :
 
 
 

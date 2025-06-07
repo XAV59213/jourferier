@@ -2,6 +2,9 @@
 
 Une intégration Home Assistant pour savoir si **aujourd’hui est un jour férié en France** .
 
+<a href="https://www.buymeacoffee.com/xav59213"> <img src="https://img.buymeacoffee.com/button-api/?text=xav59213&emoji=&slug=xav59213&button_colour=5F7FFF&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00" /> 
+
+
 ---
 
 ## 📦 Fonctionnalités

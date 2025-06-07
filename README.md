@@ -1,6 +1,6 @@
 # 🇫🇷 Jour Férié
 
-Une intégration Home Assistant pour savoir si **aujourd’hui est un jour férié en France** (année 2025).
+Une intégration Home Assistant pour savoir si **aujourd’hui est un jour férié en France** .
 
 ---
 

@@ -4,6 +4,8 @@ SENSOR_NAME = "Jour Férié"
 SENSOR_UNIQUE_ID = f"{DOMAIN}_sensor"
 ATTR_HOLIDAY_NAME = "holiday_name"
 ATTR_DATE = "date"
+ATTR_NEXT_HOLIDAY = "next_holiday"
+ATTR_DAYS_UNTIL = "days_until"
 
 PUBLIC_HOLIDAYS_2025 = {
     "01:01": "Jour de l’An",

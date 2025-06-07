@@ -7,9 +7,12 @@ from .const import DOMAIN
 _LOGGER = logging.getLogger(__name__)
 
 class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
+    """Gérer le flux de configuration."""
+
     VERSION = 1
 
     async def async_step_user(self, user_input=None):
+        """Gérer l'étape utilisateur."""
         if self._async_current_entries():
             return self.async_abort(reason="single_instance_only")
 

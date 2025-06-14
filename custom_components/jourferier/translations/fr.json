@@ -32,6 +32,11 @@
           }
         }
       }
+    },
+    "calendar": {
+      "jour_ferie_calendar": {
+        "name": "Calendrier des Jours Fériés"
+      }
     }
   }
 }

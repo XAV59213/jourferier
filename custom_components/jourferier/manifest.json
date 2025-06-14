@@ -2,12 +2,12 @@
   "domain": "jourferier",
   "name": "Jour Férié",
   "codeowners": ["@xav59213"],
+  "config_flow": true,
   "dependencies": [],
   "documentation": "https://github.com/xav59213/xav59213-jour-ferie",
+  "integration_type": "entity",
   "iot_class": "local_polling",
   "issue_tracker": "https://github.com/xav59213/xav59213-jour-ferie/issues",
   "requirements": [],
-  "version": "1.0.5",
-  "config_flow": true,
-  "integration_type": "entity"
+  "version": "1.0.6"
 }

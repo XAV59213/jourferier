@@ -9,6 +9,5 @@
   "requirements": [],
   "version": "1.0.5",
   "config_flow": true,
-  "integration_type": "entity",
-  "platforms": ["sensor", "calendar"]
+  "integration_type": "entity"
 }

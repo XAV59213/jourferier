@@ -4,8 +4,7 @@
 **Une intégration Home Assistant pour suivre les jours fériés en France**  
 Affichez si **aujourd’hui est un jour férié** via un capteur et **intégrez automatiquement les jours fériés de 2025** dans votre calendrier Home Assistant.
 
-
-<a href="https://www.buymeacoffee.com/xav59213"> <img src="https://img.buymeacoffee.com/button-api/?text=xav592
+<a href="https://www.buymeacoffee.com/xav59213"> <img src="https://img.buymeacoffee.com/button-api/?text=xav59213&emoji=&slug=xav59213&button_colour=5F7FFF&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00" /> </a>
 ---
 
 ## 📦 Fonctionnalités

@@ -42,6 +42,7 @@ type: entity
 entity: sensor.jour_ferie
 name: Jour Férié
 icon: mdi:calendar-star
+```
 
 ```yaml
 {% set sensor = 'sensor.jour_ferie' %}

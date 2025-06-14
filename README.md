@@ -1,61 +1,75 @@
-🇫🇷 Jour Férié
-Une intégration Home Assistant pour suivre les jours fériés en France. Affichez si aujourd’hui est un jour férié via un capteur et intégrez les jours fériés de 2025 dans votre calendrier Home Assistant.
+# 🇫🇷 Jour Férié
 
+**Une intégration Home Assistant pour suivre les jours fériés en France**  
+Affichez si **aujourd’hui est un jour férié** via un capteur et **intégrez automatiquement les jours fériés de 2025** dans votre calendrier Home Assistant.
 
-  
+---
 
+## 📦 Fonctionnalités
 
+- 🗓️ **Capteur `sensor.jour_ferie`**
+  - Nom du jour férié actuel (ou `Aucun`)
+  - Prochain jour férié
+  - Nombre de jours restants
 
-📦 Fonctionnalités
+- 📅 **Calendrier `calendar.jour_ferie_calendar`**
+  - Événements sur une journée complète pour chaque jour férié 2025
 
-🗓️ Capteur sensor.jour_ferie : Affiche les informations suivantes :
-Nom du jour férié actuel (ou "Aucun" si ce n’est pas un jour férié).
-Prochain jour férié à venir.
-Nombre de jours restants jusqu’au prochain jour férié.
+- 🧩 **Configuration simplifiée**
+  - Ajout via l’interface Home Assistant (UI)
 
+- 🛠️ **Service `jourferier.create_card`**
+  - Ajoute automatiquement une carte Lovelace pour le capteur
 
-📅 Calendrier calendar.jour_ferie_calendar : Intègre les jours fériés de 2025 comme des événements d’une journée entière, avec descriptions.
-🧩 Configuration simple : Installation et configuration via l’interface graphique (UI).
-🛠️ Service jourferier.create_card : Ajoute automatiquement une carte Lovelace pour afficher le capteur.
+---
 
+## 🛠️ Installation
 
-🛠️ Installation
-Prérequis
+### ✅ Prérequis
 
-Home Assistant version 2024.6.0 ou supérieure.
-HACS (recommandé pour une installation simplifiée).
+- Home Assistant ≥ `2024.6.0`
+- [HACS](https://hacs.xyz/) recommandé
 
-Installation via HACS (recommandé)
+### 📥 Installation via HACS (recommandée)
 
-Ouvrez HACS dans Home Assistant (HACS > Intégrations).
-Cliquez sur les trois points en haut à droite, puis sélectionnez Dépôt personnalisé.
-Ajoutez le dépôt :  https://github.com/xav59213/xav59213-jour-ferie
+1. Ouvrir **HACS > Intégrations**
+2. Cliquer sur ⋮ > **Dépôt personnalisé**
+3. Ajouter ce dépôt :
 
-Type : Intégration.
-Recherchez et installez Jour Férié.
-Redémarrez Home Assistant.
-Allez dans Paramètres > Appareils & Services > Ajouter une intégration.
-Recherchez Jour Férié et configurez l’intégration (aucun paramètre requis).
+https://github.com/xav59213/xav59213-jour-ferie
 
-Installation manuelle
+Type : **Intégration**
+4. Rechercher et installer **Jour Férié**
+5. Redémarrer Home Assistant
+6. Aller dans **Paramètres > Appareils & Services > Ajouter une intégration**
+7. Sélectionner **Jour Férié** (aucune configuration requise)
 
-Téléchargez la dernière version du dépôt depuis GitHub.
-Copiez le dossier custom_components/jourferier dans /config/custom_components/ de votre installation Home Assistant.
-Redémarrez Home Assistant.
-Ajoutez l’intégration via Paramètres > Appareils & Services > Ajouter une intégration > Jour Férié.
+### 📂 Installation manuelle
 
+1. Télécharger la dernière version du dépôt
+2. Copier le dossier `custom_components/jourferier` vers :
 
-📊 Utilisation
-Capteur : sensor.jour_ferie
-Affichez les informations sur les jours fériés dans une carte Lovelace.
-Exemple de carte d’entité
+/config/custom_components/
+
+3. Redémarrer Home Assistant
+4. Ajouter l’intégration via **Paramètres > Appareils & Services**
+
+---
+
+## 📊 Utilisation
+
+### 🔎 Capteur : `sensor.jour_ferie`
+
+#### 📋 Exemple carte d'entité
+
+```yaml
 type: entity
 entity: sensor.jour_ferie
 name: Jour Férié
 icon: mdi:calendar-star
 
-Exemple de carte Markdown avec template
-Affichez des informations personnalisées sur le jour férié actuel et le prochain :
+📝 Exemple carte Markdown (template)
+
 type: markdown
 content: |
   {% set sensor = 'sensor.jour_ferie' %}
@@ -74,150 +88,102 @@ content: |
   - Aucun jour férié à venir. Vérifiez la configuration du capteur {{ sensor }}.
   {% endif %}
 
+🗓️ Calendrier : calendar.jour_ferie_calendar
+Exemple carte calendrier :
 
-Calendrier : calendar.jour_ferie_calendar
-Affichez les jours fériés de 2025 dans une carte de calendrier.
-Exemple de carte de calendrier
 type: calendar
 entities:
   - calendar.jour_ferie_calendar
 
+🛠️ Service Lovelace : jourferier.create_card
 
-Service Lovelace : jourferier.create_card
-Ajoutez automatiquement une carte pour sensor.jour_ferie dans la première vue de votre tableau de bord :
+Ajoute automatiquement une carte pour sensor.jour_ferie dans la première vue Lovelace.
+Exécution manuelle :
 
-Ouvrez Outils de développement > Services.
-Sélectionnez le service jourferier.create_card.
-Appelez le service (aucun paramètre requis).
+    Aller dans Outils de développement > Services
 
-Exemple YAML pour une automatisation :
+    Choisir : jourferier.create_card
+
+    Appeler le service (sans paramètres)
+
+Exemple YAML pour automatisation :
+
 service: jourferier.create_card
 
-
-🔍 Détails du capteur : sensor.jour_ferie
-
-
-
-Attribut
-Description
-
-
-
-state
-Nom du jour férié ou "Aucun"
-
-
-holiday_name
-Nom du jour férié actuel
-
-
-date
-Date du jour (format DD:MM)
-
-
-next_holiday
-Nom du prochain jour férié
-
-
-days_until
-Nombre de jours jusqu’au prochain jour férié
-
-
-
+🔍 Détails du capteur
+Attribut	Description
+state	Nom du jour férié ou Aucun
+holiday_name	Nom du jour férié actuel
+date	Date du jour (format DD:MM)
+next_holiday	Nom du prochain jour férié
+days_until	Nombre de jours restants jusqu’au prochain
 📅 Jours fériés inclus (2025)
-
-
-
-Date
-Jour férié
-
-
-
-1er janvier
-Jour de l’An
-
-
-21 avril
-Lundi de Pâques
-
-
-1er mai
-Fête du Travail
-
-
-8 mai
-Victoire 1945
-
-
-29 mai
-Ascension
-
-
-9 juin
-Lundi de Pentecôte
-
-
-14 juillet
-Fête Nationale
-
-
-15 août
-Assomption
-
-
-1er novembre
-Toussaint
-
-
-11 novembre
-Armistice 1918
-
-
-25 décembre
-Noël
-
-
-
-🔧 Infos techniques
-
-Domaine : jourferier
-Configuration : Via l’interface graphique (config_flow)
-Propriétaire : @xav59213
-Code source : GitHub
-Suivi des bugs : Issues
-Version : 1.0.5
-Compatibilité : Home Assistant 2024.6.0 ou supérieur
-Dépendances : Aucune
-
-
+Date	Jour férié
+1er janvier	Jour de l’An
+21 avril	Lundi de Pâques
+1er mai	Fête du Travail
+8 mai	Victoire 1945
+29 mai	Ascension
+9 juin	Lundi de Pentecôte
+14 juillet	Fête Nationale
+15 août	Assomption
+1er novembre	Toussaint
+11 novembre	Armistice 1918
+25 décembre	Noël
+⚙️ Informations techniques
+Élément	Détail
+Domaine	jourferier
+Configuration	Interface graphique (config_flow)
+Propriétaire	@xav59213
+Code source	GitHub
+Suivi bugs	Issues
+Version	1.0.5
+Compatibilité	Home Assistant ≥ 2024.6.0
+Dépendances	Aucune
 🛠️ Résolution des problèmes
-L’entité calendar.jour_ferie_calendar n’apparaît pas
+❌ calendar.jour_ferie_calendar n’apparaît pas
 
-Vérifiez les logs :docker logs <votre_conteneur>
+    Vérifiez les logs Docker :
 
-Ou consultez Paramètres > Système > Journaux.Recherchez des erreurs liées à jourferier ou calendar.
-Activez le débogage :Ajoutez à configuration.yaml :logger:
-  default: info
-  logs:
-    custom_components.jourferier: debug
-    homeassistant.components.calendar: debug
+docker logs <votre_conteneur>
 
-Redémarrez et consultez les logs.
-Vérifiez la version de Home Assistant :Assurez-vous d’utiliser une version ≥ 2024.6.0 (Paramètres > Système > Informations).
-Réinstallez l’intégration :
-Supprimez /config/custom_components/jourferier.
-Supprimez l’intégration via Paramètres > Appareils & Services.
-Réinstallez via HACS ou manuellement.
-Redémarrez et reconfigurez.
+Ou via l’interface : Paramètres > Système > Journaux
 
+Activez le debug dans configuration.yaml :
 
+    logger:
+      default: info
+      logs:
+        custom_components.jourferier: debug
+        homeassistant.components.calendar: debug
 
-Erreur de template avec sensor.jour_ferie
-Si vous rencontrez des erreurs comme TypeError: logarithm() got an unexpected keyword argument 'level' :
+    Vérifiez votre version de HA : ≥ 2024.6.0
 
-Localisez le template dans une carte Lovelace, une automatisation, ou configuration.yaml.
-Utilisez le template corrigé fourni ci-dessus.
-Ajoutez une automatisation pour journaliser les erreurs si nécessaire :- id: log_jour_ferie_status
+    Supprimez puis réinstallez l’intégration :
+
+        Supprimer le dossier /config/custom_components/jourferier
+
+        Supprimer l’intégration via l’interface
+
+        Réinstaller via HACS ou manuellement
+
+        Redémarrer et reconfigurer
+
+⚠️ Erreur de template avec sensor.jour_ferie
+
+Erreur :
+
+TypeError: logarithm() got an unexpected keyword argument 'level'
+
+Solution :
+
+    Vérifiez vos templates dans Lovelace ou automatisations
+
+    Utilisez le template corrigé fourni plus haut
+
+Exemple d’automatisation de log d'erreur :
+
+- id: log_jour_ferie_status
   alias: Journaliser l'état du jour férié
   trigger:
     - platform: state
@@ -231,14 +197,12 @@ Ajoutez une automatisation pour journaliser les erreurs si nécessaire :- id: lo
         message: "Invalid or missing attributes for sensor.jour_ferie: next_holiday={{ state_attr('sensor.jour_ferie', 'next_holiday') }}, days_until={{ state_attr('sensor.jour_ferie', 'days_until') }}"
         level: warning
 
-
-
-
 🙌 Contribuer
 
-Signaler un bug : Ouvrez une issue sur GitHub.
-Proposer une amélioration : Soumettez une pull request ou partagez vos idées.
-Soutenir le projet : Offrez un café via Buy Me a Coffee.
+    🐞 Signaler un bug : Créer une issue
 
-🇫🇷 Un composant simple, pratique et festif pour ne jamais rater un jour férié en France !
+    💡 Proposer une amélioration : Pull Request bienvenue !
 
+    ☕ Soutenir le projet : Buy Me a Coffee (à ajouter si lien disponible)
+
+    🇫🇷 Un composant simple, pratique et festif pour ne jamais rater un jour férié en France !

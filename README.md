@@ -42,3 +42,20 @@ type: entity
 entity: sensor.jour_ferie
 name: Jour Férié
 icon: mdi:calendar-star
+
+```yaml
+{% set sensor = 'sensor.jour_ferie' %}
+{% set holiday_name = state_attr(sensor, 'holiday_name') | default('Aucun') %}
+{% set today_holiday = holiday_name if holiday_name != 'Aucun' else None %}
+{% set next_holiday = state_attr(sensor, 'next_holiday') | default(None) %}
+{% set days_until = state_attr(sensor, 'days_until') | default(None) %}
+{% if today_holiday %}
+- 🎉 **Aujourd'hui, c'est {{ today_holiday }} !**
+{% else %}
+- Aujourd'hui, pas de jour férié.
+{% endif %}
+{% if next_holiday and days_until is not none and days_until | float >= 0 %}
+- Le prochain jour férié est **{{ next_holiday }}** dans **{{ days_until | int }} jour{{ 's' if days_until | int != 1 else '' }}**.
+{% else %}
+- Aucun jour férié à venir. Vérifiez la configuration du capteur {{ sensor }}.
+{% endif %}

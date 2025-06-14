@@ -9,22 +9,31 @@ from .const import DOMAIN
 _LOGGER = logging.getLogger(__name__)
 
 async def async_setup(hass: HomeAssistant, config: dict) -> bool:
+    """Configurer le composant."""
     _LOGGER.info("Initialisation de %s", DOMAIN)
     return True
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """Configurer une entrée de configuration."""
     try:
-        await hass.config_entries.async_forward_entry_setups(entry, ["sensor"])
+        # Configurer les plateformes sensor et calendar
+        await hass.config_entries.async_forward_entry_setups(entry, ["sensor", "calendar"])
     except Exception as e:
-        _LOGGER.error("Erreur lors de la configuration du sensor : %s", e)
+        _LOGGER.error("Erreur lors de la configuration des plateformes : %s", e)
         raise ConfigEntryNotReady from e
 
     async def handle_create_card_service(call):
+        """Service pour ajouter une carte Lovelace."""
         lovelace_path = hass.config.path(".storage/lovelace")
         try:
             with open(lovelace_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
-            new_card = {"type": "entity", "entity": "sensor.jour_ferie", "name": "Jour Férié", "icon": "mdi:calendar-star"}
+            new_card = {
+                "type": "entity",
+                "entity": "sensor.jour_ferie",
+                "name": "Jour Férié",
+                "icon": "mdi:calendar-star"
+            }
             data["data"]["config"]["views"][0]["cards"].append(new_card)
             with open(lovelace_path, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=2)
@@ -36,4 +45,5 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     return True
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    return await hass.config_entries.async_unload_platforms(entry, ["sensor"])
+    """Décharger une entrée de configuration."""
+    return await hass.config_entries.async_unload_platforms(entry, ["sensor", "calendar"])

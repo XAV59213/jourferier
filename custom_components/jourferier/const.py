@@ -11,7 +11,6 @@ ATTR_DAYS_UNTIL = "days_until"
 
 def get_holidays(year: int) -> dict[date, str]:
     """Retourne un dictionnaire de dates de jours fériés pour l’année spécifiée."""
-    # Calcul du dimanche de Pâques (méthode de Meeus/Jones/Butcher)
     a = year % 19
     b = year // 100
     c = year % 100

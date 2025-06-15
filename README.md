@@ -169,79 +169,21 @@ service: jourferier.create_card
 | **Domaine**       | `jourferier`                      |
 | **Configuration** | Interface graphique (`config_flow`) |
 | **Propriétaire**  | [@xav59213](https://github.com/xav59213) |
-| **Code source**   | [GitHub](https://github.com/xav59213/xav59213-jour-ferie) |
-| **Suivi bugs**    | [Issues](https://github.com/xav59213/xav59213-jour-ferie/issues) |
+| **Code source**   | [GitHub](https://github.com/xav59213/jourferier) |
+| **Suivi bugs**    | [Issues](https://github.com/xav59213/jourferierissues) |
 | **Version**       | `1.0.5`                            |
 | **Compatibilité** | Home Assistant ≥ `2024.6.0`       |
 | **Dépendances**   | Aucune                             |
 
 ---
 
-## 🛠️ Résolution des problèmes
 
-### ❌ `calendar.jour_ferie_calendar` n’apparaît pas
-
-- Vérifiez les logs Docker :
-  ```bash
-  docker logs <votre_conteneur>
-  ```
-
-- Ou via l’interface : **Paramètres > Système > Journaux**
-
-- Activez le debug dans `configuration.yaml` :
-  ```yaml
-  logger:
-    default: info
-    logs:
-      custom_components.jourferier: debug
-      homeassistant.components.calendar: debug
-  ```
-
-- Vérifiez votre version de HA : **≥ 2024.6.0**
-- Supprimez puis réinstallez l’intégration :
-  - Supprimer le dossier `/config/custom_components/jourferier`
-  - Supprimer l’intégration via l’interface
-  - Réinstaller via HACS ou manuellement
-  - Redémarrer et reconfigurer
-
----
-
-### ⚠️ Erreur de template avec `sensor.jour_ferie`
-
-**Erreur :**
-```
-TypeError: logarithm() got an unexpected keyword argument 'level'
-```
-
-#### Solution :
-- Vérifiez vos templates dans Lovelace ou automatisations
-- Utilisez le template corrigé fourni plus haut
-
-#### Exemple d’automatisation de log d'erreur :
-
-```yaml
-- id: log_jour_ferie_status
-  alias: Journaliser l'état du jour férié
-  trigger:
-    - platform: state
-      entity_id: sensor.jour_ferie
-  condition:
-    - condition: template
-      value_template: "{{ state_attr('sensor.jour_ferie', 'next_holiday') is none or state_attr('sensor.jour_ferie', 'days_until') is none }}"
-  action:
-    - service: system_log.write
-      data:
-        message: "Invalid or missing attributes for sensor.jour_ferie: next_holiday={{ state_attr('sensor.jour_ferie', 'next_holiday') }}, days_until={{ state_attr('sensor.jour_ferie', 'days_until') }}"
-        level: warning
-```
-
----
 
 ## 🙌 Contribuer
 
-- 🐞 **Signaler un bug** : [Créer une issue](https://github.com/xav59213/xav59213-jour-ferie/issues)
+- 🐞 **Signaler un bug** : [Créer une issue](https://github.com/xav59213/jourferier/issues)
 - 💡 **Proposer une amélioration** : Pull Request bienvenue !
-- ☕ **Soutenir le projet** : [Buy Me a Coffee](https://www.buymeacoffee.com/) *(à ajouter si lien disponible)*
+- ☕ **Soutenir le projet** : [Buy Me a Coffee]([https://www.buymeacoffee.com/](https://www.buymeacoffee.com/xav59213)) 
 
 ---
 

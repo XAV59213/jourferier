@@ -32,8 +32,15 @@ class JourFerieCalendar(CalendarEntity):
         _LOGGER.debug("Initialisation de JourFerieCalendar")
         self._config_entry = config_entry
         self._attr_name = "Calendrier des Jours Fériés"
-        self._attr_unique_id = "calendrier_des_jours_feries"  # Identifiant fixe
+        self._attr_unique_id = "calendrier_des_jours_feries"
         self._events = self._generate_events()
+
+        # ✅ Lier ce calendrier à l'appareil "Jour Férié"
+        self._attr_device_info = {
+            "identifiers": {(DOMAIN, "jourferier")},
+            "name": "Jour Férié",
+            "manufacturer": "xav59213",
+        }
 
     def _generate_events(self) -> list[CalendarEvent]:
         """Générer les événements de calendrier pour les jours fériés de 2025."""

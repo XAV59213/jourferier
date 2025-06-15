@@ -1,7 +1,7 @@
 
 # 🇫🇷 Jour Férié
 
-# 📨 Free Mobile SMS XA – Intégration Home Assistant
+# 📨 Jour Férié – Intégration Home Assistant
 
 ![Logo](./images/logo.png)
 

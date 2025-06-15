@@ -6,7 +6,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.util import dt as dt_util
-from .const import DOMAIN, PUBLIC_HOLIDAYS_2025, HOLIDAY_DESCRIPTIONS
+from .const import DOMAIN, get_holidays, HOLIDAY_DESCRIPTIONS
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -33,40 +33,35 @@ class JourFerieCalendar(CalendarEntity):
         self._config_entry = config_entry
         self._attr_name = "Calendrier des Jours Fériés"
         self._attr_unique_id = "calendrier_des_jours_feries"
-        self._events = self._generate_events()
-
-        # ✅ Lier ce calendrier à l'appareil "Jour Férié"
         self._attr_device_info = {
             "identifiers": {(DOMAIN, "jourferier")},
             "name": "Jour Férié",
             "manufacturer": "xav59213",
         }
+        self._events = self._generate_events()
 
     def _generate_events(self) -> list[CalendarEvent]:
-        """Générer les événements de calendrier pour les jours fériés de 2025."""
+        """Générer les événements de calendrier dynamiquement."""
         _LOGGER.debug("Génération des événements pour les jours fériés")
         events = []
-        current_year = 2025
+        current_year = datetime.now().year
+        holidays = get_holidays(current_year)
 
-        for date_str, holiday_name in PUBLIC_HOLIDAYS_2025.items():
+        for holiday_date, name in holidays.items():
             try:
-                day, month = map(int, date_str.split(":"))
-                event_date = datetime(current_year, month, day, tzinfo=dt_util.DEFAULT_TIME_ZONE)
-                description = HOLIDAY_DESCRIPTIONS.get(holiday_name, "")
-                
+                event_date = datetime.combine(holiday_date, datetime.min.time(), tzinfo=dt_util.DEFAULT_TIME_ZONE)
+                description = HOLIDAY_DESCRIPTIONS.get(name, "")
                 events.append(
                     CalendarEvent(
-                        summary=holiday_name,
+                        summary=name,
                         description=description,
-                        start=event_date.replace(hour=0, minute=0, second=0),
-                        end=event_date.replace(hour=23, minute=59, second=59),
+                        start=event_date.replace(hour=0, minute=0),
+                        end=event_date.replace(hour=23, minute=59),
                     )
                 )
-                _LOGGER.debug("Événement ajouté : %s (%s)", holiday_name, event_date)
-            except ValueError as e:
-                _LOGGER.error("Erreur lors de la création de l'événement pour %s : %s", date_str, e)
+            except Exception as e:
+                _LOGGER.error("Erreur lors de la création de l'événement %s : %s", name, e)
 
-        _LOGGER.debug("Événements générés : %s", len(events))
         return sorted(events, key=lambda x: x.start)
 
     @property
@@ -75,21 +70,13 @@ class JourFerieCalendar(CalendarEntity):
         now = dt_util.now()
         for event in self._events:
             if event.start <= now < event.end:
-                _LOGGER.debug("Événement en cours trouvé : %s", event.summary)
                 return event
             if event.start > now:
-                _LOGGER.debug("Prochain événement trouvé : %s", event.summary)
                 return event
-        _LOGGER.debug("Aucun événement trouvé")
         return None
 
-    async def async_get_events(
-        self, hass: HomeAssistant, start_date: datetime, end_date: datetime
-    ) -> list[CalendarEvent]:
-        """Retourner les événements dans une plage de dates donnée."""
-        events = [
-            event for event in self._events
-            if event.start >= start_date and event.end <= end_date
+    async def async_get_events(self, hass, start_date, end_date) -> list[CalendarEvent]:
+        """Retourner les événements entre deux dates."""
+        return [
+            e for e in self._events if start_date <= e.start <= end_date
         ]
-        _LOGGER.debug("Événements récupérés pour %s à %s : %s", start_date, end_date, len(events))
-        return events

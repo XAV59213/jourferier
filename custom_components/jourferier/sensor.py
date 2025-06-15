@@ -1,6 +1,6 @@
 """Capteur pour afficher si aujourd'hui est un jour férié."""
 import logging
-from datetime import date, datetime, timedelta
+from datetime import date
 from homeassistant.components.sensor import SensorEntity
 from .const import (
     DOMAIN, SENSOR_NAME, SENSOR_UNIQUE_ID, PUBLIC_HOLIDAYS_2025 as HOLIDAYS,
@@ -20,6 +20,16 @@ class JourFerieSensor(SensorEntity):
         self._state = None
         self._attributes = {}
 
+        # ✅ Appareil visible dans "Appareils & Services"
+        self._attr_device_info = {
+            "identifiers": {(DOMAIN, "jourferier")},
+            "name": "Jour Férié",
+            "manufacturer": "xav59213",
+            "model": "Capteur jours fériés 2025",
+            "sw_version": "1.0.6",
+            "configuration_url": "https://github.com/xav59213/xav59213-jour-ferie",
+        }
+
     def update(self):
         """Met à jour le capteur pour le jour férié."""
         today = date.today()
@@ -32,14 +42,12 @@ class JourFerieSensor(SensorEntity):
         days_until = None
         current_year = today.year
 
-        # Convertir les dates des jours fériés en objets date pour l'année courante
         holiday_dates = []
         for date_str, name in HOLIDAYS.items():
             day, month = map(int, date_str.split(":"))
             holiday_date = date(current_year, month, day)
             holiday_dates.append((holiday_date, name))
 
-        # Trier les dates et trouver la prochaine
         holiday_dates.sort()
         for holiday_date, name in holiday_dates:
             if holiday_date > today:
@@ -47,7 +55,6 @@ class JourFerieSensor(SensorEntity):
                 days_until = (holiday_date - today).days
                 break
 
-        # Si aucun jour férié n'est trouvé dans l'année courante, prendre le premier de l'année suivante
         if not next_holiday:
             first_holiday_date = date(current_year + 1, 1, 1)
             next_holiday = HOLIDAYS.get("01:01", "Jour de l’An")

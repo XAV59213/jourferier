@@ -46,7 +46,7 @@ Affichez si **aujourd’hui est un jour férié** via un capteur et **intégrez 
 2. Cliquer sur ⋮ > **Dépôt personnalisé**
 3. Ajouter ce dépôt :
    ```
-   https://github.com/xav59213/xav59213-jour-ferie
+   https://github.com/xav59213/jourferier
    ```
    Type : **Intégration**
 4. Rechercher et installer **Jour Férié**

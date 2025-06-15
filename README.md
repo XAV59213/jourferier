@@ -1,6 +1,14 @@
 
 # 🇫🇷 Jour Férié
 
+# 📨 Free Mobile SMS XA – Intégration Home Assistant
+
+![Logo](./images/logo.png)
+
+[![GitHub release](https://img.shields.io/github/v/release/XAV59213/jourferier)](https://github.com/XAV59213/jourferier/releases)
+[![HACS Custom](https://img.shields.io/badge/HACS-Custom-orange.svg?logo=home-assistant)](https://hacs.xyz/)
+[![License: LGPL v2.1](https://img.shields.io/badge/License-LGPL%20v2.1-blue.svg)](./LICENSE)
+
 **Une intégration Home Assistant pour suivre les jours fériés en France**  
 Affichez si **aujourd’hui est un jour férié** via un capteur et **intégrez automatiquement les jours fériés de 2025** dans votre calendrier Home Assistant.
 

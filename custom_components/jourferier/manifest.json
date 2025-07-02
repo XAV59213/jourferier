@@ -4,10 +4,10 @@
   "codeowners": ["@xav59213"],
   "config_flow": true,
   "dependencies": [],
-  "documentation": "https://github.com/xav59213/xav59213-jour-ferie",
+  "documentation": "https://github.com/XAV59213/jourferier",
   "integration_type": "hub",
   "iot_class": "local_polling",
-  "issue_tracker": "https://github.com/xav59213/xav59213-jour-ferie/issues",
+  "issue_tracker": "https://github.com/xav59213/xav59213/jourferier/issues",
   "requirements": [],
   "version": "1.1.0"
 }

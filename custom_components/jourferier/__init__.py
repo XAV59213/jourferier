@@ -25,7 +25,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     try:
         # Configurer les plateformes sensor et calendar
         _LOGGER.debug("Chargement des plateformes : sensor, calendar")
-        await hass.config_entries.async_forward_entry_setups(entry, ["sensor", "calendar"])
+        await hass.config_entries.async_forward_entry_setups(entry, ["sensor", "calendar", "binary_sensor"])
         _LOGGER.info("Plateformes sensor et calendar configurées avec succès")
     except Exception as e:
         _LOGGER.error("Erreur lors de la configuration des plateformes : %s", e)

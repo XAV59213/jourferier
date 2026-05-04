@@ -117,7 +117,16 @@ type: calendar
 entities:
   - calendar.jour_ferie_calendar
 ```
+### 🔀 Binary sensor : `binary_sensor.est_ferie`
 
+#### Utilisation recommandée
+
+```yaml
+# Condition pour bloquer un réveil les jours fériés
+condition:
+  - condition: state
+    entity_id: binary_sensor.est_ferie
+    state: "off"
 ---
 
 ### 🛠️ Service Lovelace : `jourferier.create_card`

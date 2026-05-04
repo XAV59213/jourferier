@@ -22,6 +22,12 @@ Affichez si **aujourd’hui est un jour férié** via un capteur et **intégrez 
   - Prochain jour férié
   - Nombre de jours restants
 
+- 🔀 **Binary sensor `binary_sensor.est_ferie`** *(nouveau)*
+  - `on` = Aujourd’hui est un jour férié
+  - `off` = Jour normal
+  - Attribut `holiday_name` si férié
+  - **Idéal pour bloquer réveils, alarmes, etc.**
+
 - 📅 **Calendrier `calendar.jour_ferie_calendar`**
   - Événements sur une journée complète pour chaque jour férié 
 
@@ -30,7 +36,6 @@ Affichez si **aujourd’hui est un jour férié** via un capteur et **intégrez 
 
 - 🛠️ **Service `jourferier.create_card`**
   - Ajoute automatiquement une carte Lovelace pour le capteur
-
 ---
 
 ## 🛠️ Installation

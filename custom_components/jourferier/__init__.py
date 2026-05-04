@@ -56,4 +56,4 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Décharger une entrée de configuration."""
     _LOGGER.info("Déchargement des plateformes pour %s", DOMAIN)
-    return await hass.config_entries.async_unload_platforms(entry, ["sensor", "calendar"])
+    return await hass.config_entries.async_unload_platforms(entry, ["sensor", "calendar", "binary_sensor"])

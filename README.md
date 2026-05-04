@@ -127,6 +127,7 @@ condition:
   - condition: state
     entity_id: binary_sensor.est_ferie
     state: "off"
+```
 ---
 
 ### 🛠️ Service Lovelace : `jourferier.create_card`

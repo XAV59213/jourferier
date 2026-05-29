@@ -1,5 +1,6 @@
 """Binary sensor pour indiquer si aujourd'hui est un jour férié."""
 import logging
+from datetime import timedelta, date
 from datetime import timedelta
 from homeassistant.components.binary_sensor import BinarySensorEntity
 from homeassistant.util import dt as dt_util
@@ -23,14 +24,18 @@ class EstFerieBinarySensor(BinarySensorEntity):
             "identifiers": {(DOMAIN, "jourferier")},
             "name": "Jour Férié",
             "manufacturer": "xav59213",
+            "manufacturer": MANUFACTURER,
             "model": "Capteur jours fériés dynamique",
             "sw_version": "1.0.6",
+            "sw_version": VERSION,
+            "configuration_url": "https://github.com/xav59213/xav59213-jour-ferie",
         }
         self._attr_is_on = False
 
     def update(self):
         """Mise à jour du statut."""
         today = date.today()
+        today = dt_util.now().date()
         holidays = get_holidays(today.year)
         self._attr_is_on = today in holidays
 
@@ -44,7 +49,6 @@ class EstFerieBinarySensor(BinarySensorEntity):
         """Retourne True si c'est un jour férié."""
         return self._attr_is_on
 
-
 class DemainFerieBinarySensor(BinarySensorEntity):
     """Binary sensor : True si demain est férié."""
 
@@ -56,14 +60,18 @@ class DemainFerieBinarySensor(BinarySensorEntity):
             "identifiers": {(DOMAIN, "jourferier")},
             "name": "Jour Férié",
             "manufacturer": "xav59213",
+            "manufacturer": MANUFACTURER,
             "model": "Capteur jours fériés dynamique",
             "sw_version": "1.0.6",
+            "sw_version": VERSION,
+            "configuration_url": "https://github.com/xav59213/xav59213-jour-ferie",
         }
         self._attr_is_on = False
 
     def update(self):
         """Mise à jour du statut."""
         tomorrow = date.today() + timedelta(days=1)
+        tomorrow = dt_util.now().date() + timedelta(days=1)
         holidays = get_holidays(tomorrow.year)
         self._attr_is_on = tomorrow in holidays
 

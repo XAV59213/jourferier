@@ -1,9 +1,9 @@
 """Capteur pour afficher si aujourd'hui est un jour férié."""
 import logging
-from datetime import date
 from homeassistant.components.sensor import SensorEntity
+from homeassistant.util import dt as dt_util
 from .const import (
-    DOMAIN, SENSOR_NAME, SENSOR_UNIQUE_ID,
+    DOMAIN, SENSOR_NAME, SENSOR_UNIQUE_ID, VERSION, MANUFACTURER,
     ATTR_HOLIDAY_NAME, ATTR_DATE, ATTR_NEXT_HOLIDAY, ATTR_DAYS_UNTIL,
     get_holidays
 )
@@ -23,14 +23,14 @@ class JourFerieSensor(SensorEntity):
         self._attr_device_info = {
             "identifiers": {(DOMAIN, "jourferier")},
             "name": "Jour Férié",
-            "manufacturer": "xav59213",
+            "manufacturer": MANUFACTURER,
             "model": "Capteur jours fériés dynamique",
-            "sw_version": "1.0.6",
+            "sw_version": VERSION,
             "configuration_url": "https://github.com/xav59213/xav59213-jour-ferie",
         }
 
     def update(self):
-        today = date.today()
+        today = dt_util.now().date()
         holidays = get_holidays(today.year)
         today_holiday = holidays.get(today)
         self._state = today_holiday if today_holiday else "Aucun"

@@ -1,7 +1,6 @@
 """Binary sensor pour indiquer si aujourd'hui est un jour férié."""
 import logging
 from datetime import timedelta, date
-from datetime import timedelta
 from homeassistant.components.binary_sensor import BinarySensorEntity
 from homeassistant.util import dt as dt_util
 from .const import DOMAIN, get_holidays, ATTR_HOLIDAY_NAME, ATTR_DATE, VERSION, MANUFACTURER

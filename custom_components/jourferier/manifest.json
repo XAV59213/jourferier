@@ -1,7 +1,9 @@
 {
   "domain": "jourferier",
   "name": "Jour Férié",
-  "codeowners": ["@xav59213"],
+  "codeowners": [
+    "@xav59213"
+  ],
   "config_flow": true,
   "dependencies": [],
   "documentation": "https://github.com/XAV59213/jourferier",
@@ -9,5 +11,5 @@
   "iot_class": "local_polling",
   "issue_tracker": "https://github.com/xav59213/xav59213/jourferier/issues",
   "requirements": [],
-  "version": "1.1.2"
+  "version": "9.9.9"
 }

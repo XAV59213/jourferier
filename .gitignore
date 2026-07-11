@@ -1,0 +1,15 @@
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Release assets
+jourferier.zip
+
+# Node modules (if any local installation is done)
+node_modules/
+package-lock.json
+
+# OS files
+.DS_Store

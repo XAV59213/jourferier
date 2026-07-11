@@ -9,7 +9,7 @@ ATTR_DATE = "date"
 ATTR_NEXT_HOLIDAY = "next_holiday"
 ATTR_DAYS_UNTIL = "days_until"
 
-VERSION = "1.0.6"
+VERSION = "9.9.9"
 MANUFACTURER = "xav59213"
 
 def get_holidays(year: int) -> dict[date, str]:

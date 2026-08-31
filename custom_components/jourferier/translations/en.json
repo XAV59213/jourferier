@@ -1,0 +1,13 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Jour Férié",
+        "description": "Configure the French public holiday sensor."
+      }
+    },
+    "abort": {
+      "single_instance_only": "Only a single instance of this integration is allowed."
+    }
+  }
+}

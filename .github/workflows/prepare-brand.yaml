@@ -1,0 +1,59 @@
+name: Prepare brand icons and release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag to create after brand copy
+        required: true
+        default: "1.1.3"
+      create_release:
+        description: Create GitHub release after commit
+        required: true
+        default: "true"
+
+permissions:
+  contents: write
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Copy brand icons
+        run: |
+          mkdir -p custom_components/jourferier/brand
+          mkdir -p brand
+          cp image/icon.png custom_components/jourferier/brand/icon.png
+          cp image/logo.png custom_components/jourferier/brand/logo.png
+          cp image/icon.png custom_components/jourferier/icon.png
+          cp image/logo.png custom_components/jourferier/logo.png
+          cp image/icon.png brand/icon.png
+          cp image/logo.png brand/logo.png
+
+      - name: Commit brand icons if needed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add custom_components/jourferier/brand custom_components/jourferier/icon.png custom_components/jourferier/logo.png brand
+          if git diff --cached --quiet; then
+            echo "No brand changes"
+          else
+            git commit -m "Add brand icons for HACS/Home Assistant"
+            git push
+          fi
+
+      - name: Create release
+        if: ${{ github.event.inputs.create_release == 'true' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="${{ github.event.inputs.tag }}"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists"
+          else
+            gh release create "$TAG" --title "$TAG" --notes "HACS official store readiness: brand icons, validation workflows, country FR."
+          fi

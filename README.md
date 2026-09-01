@@ -10,7 +10,7 @@
 [![License: LGPL v2.1](https://img.shields.io/badge/License-LGPL%20v2.1-blue.svg)](./LICENSE)
 
 **Une intégration Home Assistant pour suivre les jours fériés en France**  
-Affichez si **aujourd’hui est un jour férié** via un capteur et **intégrez automatiquement les jours fériés** dans votre calendrier Home Assistant.
+Affichez si **aujourd’hui ou demain est un jour férié** via des capteurs et **intégrez automatiquement les jours fériés** dans votre calendrier Home Assistant.
 
 <a href="https://www.buymeacoffee.com/xav59213"> <img src="https://img.buymeacoffee.com/button-api/?text=xav59213&emoji=&slug=xav59213&button_colour=5F7FFF&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00" /> </a>
 ---
@@ -22,11 +22,17 @@ Affichez si **aujourd’hui est un jour férié** via un capteur et **intégrez 
   - Prochain jour férié
   - Nombre de jours restants
 
-- 🔀 **Binary sensor `binary_sensor.est_ferie`** *(nouveau)*
+- 🔀 **Binary sensor `binary_sensor.est_ferie`**
   - `on` = Aujourd’hui est un jour férié
   - `off` = Jour normal
-  - Attribut `holiday_name` si férié
+  - Attributs `holiday_name` et `date`
   - **Idéal pour bloquer réveils, alarmes, etc.**
+
+- 🔀 **Binary sensor `binary_sensor.demain_est_ferie`**
+  - `on` = Demain est un jour férié
+  - `off` = Demain est un jour normal
+  - Attributs `holiday_name` et `date` du lendemain
+  - Utile pour préparer la veille (réveil, chauffage, poubelles…)
 
 - 📅 **Calendrier `calendar.jour_ferie_calendar`**
   - Événements sur une journée complète pour chaque jour férié 
@@ -51,7 +57,7 @@ Affichez si **aujourd’hui est un jour férié** via un capteur et **intégrez 
 2. Cliquer sur ⋮ > **Dépôt personnalisé**
 3. Ajouter ce dépôt :
    ```
-   https://github.com/xav59213/jourferier
+   https://github.com/XAV59213/jourferier
    ```
    Type : **Intégration**
 4. Rechercher et installer **Jour Férié**
@@ -117,9 +123,9 @@ type: calendar
 entities:
   - calendar.jour_ferie_calendar
 ```
-### 🔀 Binary sensor : `binary_sensor.est_ferie`
+### 🔀 Binary sensors
 
-#### Utilisation recommandée
+#### Aujourd'hui : `binary_sensor.est_ferie`
 
 ```yaml
 # Condition pour bloquer un réveil les jours fériés
@@ -127,6 +133,16 @@ condition:
   - condition: state
     entity_id: binary_sensor.est_ferie
     state: "off"
+```
+
+#### Demain : `binary_sensor.demain_est_ferie`
+
+```yaml
+# La veille d'un jour férié
+condition:
+  - condition: state
+    entity_id: binary_sensor.demain_est_ferie
+    state: "on"
 ```
 ---
 
@@ -159,16 +175,16 @@ service: jourferier.create_card
 
 ---
 
-## 📅 Jours fériés inclus (2025)
+## 📅 Jours fériés inclus
 
 | Date         | Jour férié             |
 |--------------|------------------------|
 | 1er janvier  | Jour de l’An           |
-| 21 avril     | Lundi de Pâques        |
+| Lundi de Pâques | Lundi de Pâques     |
 | 1er mai      | Fête du Travail        |
 | 8 mai        | Victoire 1945          |
-| 29 mai       | Ascension              |
-| 9 juin       | Lundi de Pentecôte     |
+| Ascension    | Ascension              |
+| Lundi de Pentecôte | Lundi de Pentecôte |
 | 14 juillet   | Fête Nationale         |
 | 15 août      | Assomption             |
 | 1er novembre | Toussaint              |
@@ -183,10 +199,10 @@ service: jourferier.create_card
 |------------------|------------------------------------|
 | **Domaine**       | `jourferier`                      |
 | **Configuration** | Interface graphique (`config_flow`) |
-| **Propriétaire**  | [@xav59213](https://github.com/xav59213) |
-| **Code source**   | [GitHub](https://github.com/xav59213/jourferier) |
-| **Suivi bugs**    | [Issues](https://github.com/xav59213/jourferier/issues) |
-| **Version**       | `1.0.5`                            |
+| **Propriétaire**  | [@XAV59213](https://github.com/XAV59213) |
+| **Code source**   | [GitHub](https://github.com/XAV59213/jourferier) |
+| **Suivi bugs**    | [Issues](https://github.com/XAV59213/jourferier/issues) |
+| **Version**       | `1.2.0`                            |
 | **Compatibilité** | Home Assistant ≥ `2024.6.0`       |
 | **Dépendances**   | Aucune                             |
 
@@ -196,9 +212,9 @@ service: jourferier.create_card
 
 ## 🙌 Contribuer
 
-- 🐞 **Signaler un bug** : [Créer une issue](https://github.com/xav59213/jourferier/issues)
+- 🐞 **Signaler un bug** : [Créer une issue](https://github.com/XAV59213/jourferier/issues)
 - 💡 **Proposer une amélioration** : Pull Request bienvenue !
-- ☕ **Soutenir le projet** : [Buy Me a Coffee]([https://www.buymeacoffee.com/](https://www.buymeacoffee.com/xav59213)) 
+- ☕ **Soutenir le projet** : [Buy Me a Coffee](https://www.buymeacoffee.com/xav59213) 
 
 ---
 

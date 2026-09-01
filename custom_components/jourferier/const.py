@@ -8,6 +8,23 @@ ATTR_HOLIDAY_NAME = "holiday_name"
 ATTR_DATE = "date"
 ATTR_NEXT_HOLIDAY = "next_holiday"
 ATTR_DAYS_UNTIL = "days_until"
+VERSION = "1.2.0"
+MANUFACTURER = "xav59213"
+DEVICE_MODEL = "Capteur jours fériés dynamique"
+DEVICE_URL = "https://github.com/XAV59213/jourferier"
+
+
+def get_device_info() -> dict:
+    """Infos appareil partagées par toutes les entités."""
+    return {
+        "identifiers": {(DOMAIN, "jourferier")},
+        "name": "Jour Férié",
+        "manufacturer": MANUFACTURER,
+        "model": DEVICE_MODEL,
+        "sw_version": VERSION,
+        "configuration_url": DEVICE_URL,
+    }
+
 
 def get_holidays(year: int) -> dict[date, str]:
     """Retourne un dictionnaire de dates de jours fériés pour l’année spécifiée."""
@@ -38,8 +55,9 @@ def get_holidays(year: int) -> dict[date, str]:
         date(year, 8, 15): "Assomption",
         date(year, 11, 1): "Toussaint",
         date(year, 11, 11): "Armistice 1918",
-        date(year, 12, 25): "Noël"
+        date(year, 12, 25): "Noël",
     }
+
 
 HOLIDAY_DESCRIPTIONS = {
     "Jour de l’An": "Bonne année ! Que cette nouvelle année soit pleine de joie et de réussite !",
@@ -52,5 +70,5 @@ HOLIDAY_DESCRIPTIONS = {
     "Assomption": "Bonne fête de l’Assomption ! Une journée de célébration mariale.",
     "Toussaint": "Bonne Toussaint ! Un moment pour honorer les saints et les défunts.",
     "Armistice 1918": "Hommage aux héros de 1918 ! Une journée de recueillement.",
-    "Noël": "Joyeux Noël ! Une fête chaleureuse pour partager amour et cadeaux !"
+    "Noël": "Joyeux Noël ! Une fête chaleureuse pour partager amour et cadeaux !",
 }

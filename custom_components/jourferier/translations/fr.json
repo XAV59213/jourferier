@@ -33,6 +33,14 @@
         }
       }
     },
+    "binary_sensor": {
+      "est_ferie": {
+        "name": "Est férié"
+      },
+      "demain_est_ferie": {
+        "name": "Demain est férié"
+      }
+    },
     "calendar": {
       "jour_ferie_calendar": {
         "name": "Calendrier des Jours Fériés"

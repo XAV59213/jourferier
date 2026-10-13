@@ -8,6 +8,7 @@ ATTR_HOLIDAY_NAME = "holiday_name"
 ATTR_DATE = "date"
 ATTR_NEXT_HOLIDAY = "next_holiday"
 ATTR_DAYS_UNTIL = "days_until"
+ATTR_PROCHAIN_PONT_POTENTIEL = "prochain_pont_potentiel"
 VERSION = "1.2.0"
 MANUFACTURER = "xav59213"
 DEVICE_MODEL = "Capteur jours fériés dynamique"
@@ -57,6 +58,25 @@ def get_holidays(year: int) -> dict[date, str]:
         date(year, 11, 11): "Armistice 1918",
         date(year, 12, 25): "Noël",
     }
+
+
+def is_day_off(target_date: date) -> bool:
+    """Retourne True si la date est un week-end ou un jour férié."""
+    return target_date.weekday() >= 5 or target_date in get_holidays(target_date.year)
+
+
+def get_next_potential_bridge(today: date) -> date | None:
+    """Retourne la date du prochain jour ouvré entre deux jours de repos."""
+    for offset in range(1, 367):
+        pont_potentiel = today + timedelta(days=offset)
+        if (
+            not is_day_off(pont_potentiel)
+            and is_day_off(pont_potentiel - timedelta(days=1))
+            and is_day_off(pont_potentiel + timedelta(days=1))
+        ):
+            return pont_potentiel
+
+    return None
 
 
 HOLIDAY_DESCRIPTIONS = {

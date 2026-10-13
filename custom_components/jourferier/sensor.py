@@ -5,7 +5,7 @@ from homeassistant.components.sensor import SensorEntity
 from .const import (
     DOMAIN, SENSOR_NAME, SENSOR_UNIQUE_ID,
     ATTR_HOLIDAY_NAME, ATTR_DATE, ATTR_NEXT_HOLIDAY, ATTR_DAYS_UNTIL,
-    get_holidays
+    ATTR_PROCHAIN_PONT_POTENTIEL, get_holidays, get_next_potential_bridge,
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -45,11 +45,18 @@ class JourFerieSensor(SensorEntity):
                 days_until = (holiday_date - today).days
                 break
 
+        next_potential_bridge = get_next_potential_bridge(today)
+
         self._attributes = {
             ATTR_HOLIDAY_NAME: self._state,
             ATTR_DATE: today.strftime("%d:%m"),
             ATTR_NEXT_HOLIDAY: next_holiday,
-            ATTR_DAYS_UNTIL: days_until
+            ATTR_DAYS_UNTIL: days_until,
+            ATTR_PROCHAIN_PONT_POTENTIEL: (
+                next_potential_bridge.strftime("%d:%m")
+                if next_potential_bridge
+                else "Aucun"
+            ),
         }
 
     @property

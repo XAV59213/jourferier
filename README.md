@@ -21,6 +21,7 @@ Affichez si **aujourd’hui ou demain est un jour férié** via des capteurs et 
   - Nom du jour férié actuel (ou `Aucun`)
   - Prochain jour férié
   - Nombre de jours restants
+  - Date du prochain pont potentiel
 
 - 🔀 **Binary sensor `binary_sensor.est_ferie`**
   - `on` = Aujourd’hui est un jour férié
@@ -172,6 +173,7 @@ service: jourferier.create_card
 | `date`         | Date du jour (format `DD:MM`)               |
 | `next_holiday` | Nom du prochain jour férié                  |
 | `days_until`   | Nombre de jours restants jusqu’au prochain |
+| `prochain_pont_potentiel` | Date (`DD:MM`) du prochain jour ouvré entre deux jours de repos (week-end ou jour férié), ou `Aucun` |
 
 ---
 

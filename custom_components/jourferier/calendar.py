@@ -1,6 +1,6 @@
 """Capteur de calendrier pour les jours fériés."""
 import logging
-from datetime import datetime
+from datetime import datetime, date
 from homeassistant.components.calendar import CalendarEntity, CalendarEvent
 from homeassistant.core import HomeAssistant
 from homeassistant.config_entries import ConfigEntry
@@ -38,45 +38,53 @@ class JourFerieCalendar(CalendarEntity):
             "name": "Jour Férié",
             "manufacturer": "xav59213",
         }
-        self._events = self._generate_events()
 
-    def _generate_events(self) -> list[CalendarEvent]:
-        """Générer les événements de calendrier dynamiquement."""
-        _LOGGER.debug("Génération des événements pour les jours fériés")
+    def _generate_events_for_years(self, start_year: int, end_year: int) -> list[CalendarEvent]:
+        """Générer les événements pour une plage d'années."""
         events = []
-        current_year = datetime.now().year
-        holidays = get_holidays(current_year)
-
-        for holiday_date, name in holidays.items():
-            try:
-                event_date = datetime.combine(holiday_date, datetime.min.time(), tzinfo=dt_util.DEFAULT_TIME_ZONE)
-                description = HOLIDAY_DESCRIPTIONS.get(name, "")
-                events.append(
-                    CalendarEvent(
-                        summary=name,
-                        description=description,
-                        start=event_date.replace(hour=0, minute=0),
-                        end=event_date.replace(hour=23, minute=59),
+        for year in range(start_year, end_year + 1):
+            holidays = get_holidays(year)
+            for holiday_date, name in holidays.items():
+                try:
+                    event_date = datetime.combine(
+                        holiday_date, datetime.min.time(), tzinfo=dt_util.DEFAULT_TIME_ZONE
                     )
-                )
-            except Exception as e:
-                _LOGGER.error("Erreur lors de la création de l'événement %s : %s", name, e)
-
+                    description = HOLIDAY_DESCRIPTIONS.get(name, "")
+                    events.append(
+                        CalendarEvent(
+                            summary=name,
+                            description=description,
+                            start=event_date.replace(hour=0, minute=0),
+                            end=event_date.replace(hour=23, minute=59),
+                        )
+                    )
+                except Exception as e:
+                    _LOGGER.error("Erreur lors de la création de l'événement %s : %s", name, e)
         return sorted(events, key=lambda x: x.start)
 
     @property
     def event(self) -> CalendarEvent | None:
         """Retourner l'événement en cours ou le prochain événement."""
         now = dt_util.now()
-        for event in self._events:
-            if event.start <= now < event.end:
-                return event
-            if event.start > now:
-                return event
+        current_year = now.year
+        # Génère pour l'année courante et la suivante pour avoir le prochain
+        events = self._generate_events_for_years(current_year, current_year + 1)
+        for ev in events:
+            if ev.start <= now < ev.end:
+                return ev
+            if ev.start > now:
+                return ev
         return None
 
     async def async_get_events(self, hass, start_date, end_date) -> list[CalendarEvent]:
         """Retourner les événements entre deux dates."""
-        return [
-            e for e in self._events if start_date <= e.start <= end_date
-        ]
+        # Convertir en date si nécessaire
+        if isinstance(start_date, datetime):
+            start_date = start_date.date()
+        if isinstance(end_date, datetime):
+            end_date = end_date.date()
+
+        start_year = start_date.year
+        end_year = end_date.year
+        events = self._generate_events_for_years(start_year, end_year)
+        return [e for e in events if start_date <= e.start.date() <= end_date]

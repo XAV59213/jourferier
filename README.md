@@ -204,7 +204,7 @@ service: jourferier.create_card
 | **Propriétaire**  | [@XAV59213](https://github.com/XAV59213) |
 | **Code source**   | [GitHub](https://github.com/XAV59213/jourferier) |
 | **Suivi bugs**    | [Issues](https://github.com/XAV59213/jourferier/issues) |
-| **Version**       | `1.2.0`                            |
+| **Version**       | `1.2.2`                            |
 | **Compatibilité** | Home Assistant ≥ `2024.6.0`       |
 | **Dépendances**   | Aucune                             |
 

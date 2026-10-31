@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.6
+
+- fix(i18n): état sensor `aucun` en minuscules (hassfest)
+- i18n: compléter en.json et strings.json
+
 ## 1.2.5 - 2026-10-31
 
 ### Ajouté

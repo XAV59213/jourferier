@@ -23,7 +23,7 @@
       "jour_ferie": {
         "name": "Public Holiday",
         "state": {
-          "Aucun": "No public holiday"
+          "aucun": "No public holiday"
         },
         "state_attributes": {
           "holiday_name": {

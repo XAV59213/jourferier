@@ -33,7 +33,7 @@ class JourFerieSensor(SensorEntity):
         today = date.today()
         holidays = get_holidays(today.year)
         today_holiday = holidays.get(today)
-        self._state = today_holiday if today_holiday else "Aucun"
+        self._state = today_holiday if today_holiday else "aucun"
 
         # Inclure aussi l'année suivante pour calcul anticipé
         all_holidays = {**holidays, **get_holidays(today.year + 1)}
@@ -55,7 +55,7 @@ class JourFerieSensor(SensorEntity):
             ATTR_PROCHAIN_PONT_POTENTIEL: (
                 next_potential_bridge.strftime("%d:%m")
                 if next_potential_bridge
-                else "Aucun"
+                else "aucun"
             ),
         }
 

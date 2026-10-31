@@ -15,7 +15,7 @@
       "jour_ferie": {
         "name": "Jour Férié",
         "state": {
-          "Aucun": "Aucun jour férié"
+          "aucun": "Aucun jour férié"
         },
         "state_attributes": {
           "holiday_name": {

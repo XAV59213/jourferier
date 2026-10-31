@@ -18,6 +18,33 @@
       "demain_est_ferie": {
         "name": "Tomorrow is a public holiday"
       }
+    },
+    "sensor": {
+      "jour_ferie": {
+        "name": "Public Holiday",
+        "state": {
+          "Aucun": "No public holiday"
+        },
+        "state_attributes": {
+          "holiday_name": {
+            "name": "Holiday name"
+          },
+          "date": {
+            "name": "Date"
+          },
+          "next_holiday": {
+            "name": "Next public holiday"
+          },
+          "days_until": {
+            "name": "Days remaining"
+          }
+        }
+      }
+    },
+    "calendar": {
+      "jour_ferie_calendar": {
+        "name": "Public Holidays Calendar"
+      }
     }
   }
 }

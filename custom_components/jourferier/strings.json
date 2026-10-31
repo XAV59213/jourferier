@@ -9,5 +9,15 @@
     "abort": {
       "single_instance_only": "Only a single instance of this integration is allowed."
     }
+  },
+  "entity": {
+    "binary_sensor": {
+      "est_ferie": {
+        "name": "Is a public holiday"
+      },
+      "demain_est_ferie": {
+        "name": "Tomorrow is a public holiday"
+      }
+    }
   }
 }

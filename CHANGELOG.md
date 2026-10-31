@@ -1,6 +1,6 @@
 # Changelog
 
-## Non publié
+## 1.2.5 - 2026-10-31
 
 ### Ajouté
 - Carte Lovelace native **Jours fériés** (`custom:jour-ferie-card`) livrée avec l'intégration :

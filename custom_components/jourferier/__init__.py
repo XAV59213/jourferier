@@ -21,6 +21,15 @@ async def async_setup(hass: HomeAssistant, config: dict) -> bool:
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Configurer une entrée de configuration."""
     _LOGGER.info("Configuration de l'entrée pour %s", DOMAIN)
+    domain_data = hass.data.setdefault(DOMAIN, {})
+    if not domain_data.get("frontend_registered"):
+        from .frontend import JSModuleRegistration
+
+        try:
+            await JSModuleRegistration(hass).async_register()
+            domain_data["frontend_registered"] = True
+        except Exception:  # noqa: BLE001
+            _LOGGER.exception("Échec d'enregistrement de la carte Lovelace")
     try:
         _LOGGER.debug("Chargement des plateformes : %s", ", ".join(PLATFORMS))
         await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)

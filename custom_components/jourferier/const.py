@@ -92,3 +92,9 @@ HOLIDAY_DESCRIPTIONS = {
     "Armistice 1918": "Hommage aux héros de 1918 ! Une journée de recueillement.",
     "Noël": "Joyeux Noël ! Une fête chaleureuse pour partager amour et cadeaux !",
 }
+
+# Carte Lovelace native
+URL_BASE = f"/{DOMAIN}"
+CARD_FILENAME = "jour-ferie-card.js"
+CARD_TAG = "jour-ferie-card"
+STATIC_CARD_PATH = f"{URL_BASE}/{CARD_FILENAME}"

@@ -148,6 +148,28 @@ condition:
 ```
 ---
 
+### 🎉 Carte Lovelace native : « Jours fériés »
+
+L'intégration fournit sa propre carte (`custom:jour-ferie-card`), aucune installation séparée :
+la ressource `/jourferier/jour-ferie-card.js` est servie et ajoutée automatiquement aux ressources Lovelace.
+
+- Tableau de bord → **Modifier** → **Ajouter une carte** → **Jours fériés**
+- Éditeur visuel : choix du capteur (`sensor.jour_ferie` par défaut) et du titre
+
+Rendu : « Aujourd'hui, pas de jour férié. » (ou « Aujourd'hui, c'est **Noël**. ») puis
+« Le prochain jour férié est **Toussaint** dans **1 jour**. »
+
+```yaml
+type: custom:jour-ferie-card
+entity: sensor.jour_ferie
+title: Jours fériés 🎉
+```
+
+Si la carte n'apparaît pas : vider le cache du navigateur, ou ajouter à la main
+`/jourferier/jour-ferie-card.js` en **module JavaScript** (Paramètres → Tableaux de bord → Ressources).
+
+---
+
 ### 🛠️ Service Lovelace : `jourferier.create_card`
 
 Ajoute automatiquement une carte pour `sensor.jour_ferie` dans la première vue Lovelace.

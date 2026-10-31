@@ -5,6 +5,10 @@
     "@XAV59213"
   ],
   "config_flow": true,
+  "dependencies": [
+    "frontend",
+    "http"
+  ],
   "documentation": "https://github.com/XAV59213/jourferier",
   "integration_type": "hub",
   "iot_class": "local_polling",

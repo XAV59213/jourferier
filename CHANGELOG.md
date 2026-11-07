@@ -1,6 +1,6 @@
 # Changelog
 
-## Non publié
+## 1.2.8 - 2026-11-07
 
 - Nettoyage suite à la revue de Frenck : suppression de la déclaration et de la documentation du service obsolète `jourferier.create_card`, déjà retiré du code.
 - README : alignement de la version affichée sur la release actuelle 1.2.7.

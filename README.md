@@ -47,8 +47,6 @@ Affichez si **aujourd’hui ou demain est un jour férié** via des capteurs et 
 - 🧩 **Configuration simplifiée**
   - Ajout via l’interface Home Assistant (UI)
 
-- 🛠️ **Service `jourferier.create_card`**
-  - Ajoute automatiquement une carte Lovelace pour le capteur
 ---
 
 ## 🛠️ Installation
@@ -175,23 +173,6 @@ Si la carte n'apparaît pas : vider le cache du navigateur, ou ajouter à la mai
 
 ---
 
-### 🛠️ Service Lovelace : `jourferier.create_card`
-
-Ajoute automatiquement une carte pour `sensor.jour_ferie` dans la première vue Lovelace.
-
-#### Exécution manuelle :
-- Aller dans **Outils de développement > Services**
-- Choisir : `jourferier.create_card`
-- Appeler le service (sans paramètres)
-
-#### Exemple YAML pour automatisation :
-
-```yaml
-service: jourferier.create_card
-```
-
----
-
 ## 🔍 Détails du capteur
 
 | Attribut       | Description                                 |
@@ -232,7 +213,7 @@ service: jourferier.create_card
 | **Propriétaire**  | [@XAV59213](https://github.com/XAV59213) |
 | **Code source**   | [GitHub](https://github.com/XAV59213/jourferier) |
 | **Suivi bugs**    | [Issues](https://github.com/XAV59213/jourferier/issues) |
-| **Version**       | `1.2.6`                            |
+| **Version**       | `1.2.7`                            |
 | **Compatibilité** | Home Assistant ≥ `2024.6.0`       |
 | **Dépendances**   | Aucune                             |
 

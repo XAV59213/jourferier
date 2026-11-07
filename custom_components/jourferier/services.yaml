@@ -1,3 +1,0 @@
-create_card:
-  name: Créer une carte Lovelace
-  description: Ajoute automatiquement une carte Lovelace pour le capteur Jour Férié dans la première vue du tableau de bord.

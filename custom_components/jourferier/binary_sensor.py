@@ -6,7 +6,7 @@ from datetime import timedelta
 from homeassistant.components.binary_sensor import BinarySensorEntity
 from homeassistant.util import dt as dt_util
 
-from .const import ATTR_DATE, ATTR_HOLIDAY_NAME, DOMAIN, get_device_info, get_holidays, is_alsace_moselle
+from .const import ATTR_DATE, ATTR_HOLIDAY_NAME, DOMAIN, get_device_info, get_holidays, holiday_settings_from_entry
 
 
 async def async_setup_entry(hass, entry, async_add_entities):
@@ -28,7 +28,7 @@ class _HolidayBinarySensor(BinarySensorEntity):
 
     def update(self) -> None:
         target = dt_util.now().date() + timedelta(days=self._offset_days)
-        holidays = get_holidays(target.year, is_alsace_moselle(self._entry))
+        holidays = get_holidays(target.year, **holiday_settings_from_entry(self._entry))
         self._attr_is_on = target in holidays
         self._attr_extra_state_attributes = {
             ATTR_HOLIDAY_NAME: holidays.get(target, "Aucun"),

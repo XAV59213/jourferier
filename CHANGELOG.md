@@ -1,5 +1,13 @@
 # Changelog
 
+## Non publié
+
+- Choix du **pays** (et d'une subdivision si elle existe) via la bibliothèque Python `holidays`, déjà utilisée par Home Assistant. La France reste le défaut, avec les libellés historiques.
+- Option **Alsace-Moselle** conservée pour la France ; les installations existantes sont migrées sans casse (pays absent = France, réglage Alsace-Moselle conservé).
+- Sélection facultative de la langue des noms de fêtes lorsque `holidays` la propose (par défaut la langue de Home Assistant si elle est supportée ; français pour la France).
+- Dépendance `holidays>=0.50` ajoutée au manifeste, compatible avec Home Assistant 2024.6 (0.50/0.51) jusqu'au pin actuel du noyau (0.107).
+
+
 ## 1.2.9 - 2026-11-20
 
 - Ajout d'une option **Alsace-Moselle** (désactivée par défaut) pour inclure le Vendredi Saint et la Saint Étienne, disponible à l'installation et modifiable ensuite dans les options de l'intégration.

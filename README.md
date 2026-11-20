@@ -44,8 +44,14 @@ Affichez si **aujourd’hui ou demain est un jour férié** via des capteurs et 
 - 📅 **Calendrier `calendar.jour_ferie_calendar`**
   - Événements sur une journée complète pour chaque jour férié 
 
+- 🌍 **Choix du pays**
+  - Jours fériés d’un pays supporté par la bibliothèque Python `holidays` (la même que Home Assistant)
+  - Subdivision facultative (Land, État, territoire d’outre-mer…) lorsqu’elle existe
+  - Langue des noms de fêtes si la bibliothèque la propose
+  - Pour la France, les libellés habituels sont conservés ; l’option **Alsace-Moselle** reste disponible
+
 - 🧩 **Configuration simplifiée**
-  - Ajout via l’interface Home Assistant (UI)
+  - Ajout et modification via l’interface Home Assistant (UI)
 
 ---
 
@@ -68,7 +74,7 @@ Affichez si **aujourd’hui ou demain est un jour férié** via des capteurs et 
 4. Rechercher et installer **Jour Férié**
 5. Redémarrer Home Assistant
 6. Aller dans **Paramètres > Appareils & Services > Ajouter une intégration**
-7. Sélectionner **Jour Férié** (l’option Alsace-Moselle est proposée, désactivée par défaut)
+7. Sélectionner **Jour Férié**, choisir le pays (France par défaut), puis éventuellement une subdivision, une langue et l’option Alsace-Moselle (France uniquement)
 
 ### 📂 Installation manuelle
 
@@ -202,20 +208,34 @@ Si la carte n'apparaît pas : vider le cache du navigateur, ou ajouter à la mai
 | 11 novembre  | Armistice 1918         |
 | 25 décembre  | Noël                   |
 
-Les dates mobiles (**Lundi de Pâques**, **Ascension**, **Lundi de Pentecôte**) sont recalculées automatiquement chaque année, à partir de la date de Pâques.
+Les dates mobiles (**Lundi de Pâques**, **Ascension**, **Lundi de Pentecôte**) sont recalculées automatiquement chaque année.
+
+Ce tableau décrit le **calendrier national français par défaut**. Les libellés ci-dessus (par exemple « Victoire 1945 », « Fête Nationale », « Armistice 1918 ») sont conservés pour la France, y compris sur une installation existante.
 
 ---
 
-## ➕ Option Alsace-Moselle
+## 🌍 Pays, subdivision et langue
 
-Par défaut, l’intégration se limite aux jours fériés nationaux ci-dessus. Une option **Alsace-Moselle**, désactivée par défaut, ajoute les deux jours fériés observés dans le Bas-Rhin, le Haut-Rhin et la Moselle :
+À l’installation, puis via **Paramètres > Appareils & services > Jour Férié > Configurer** :
+
+1. **Pays** — la liste est celle des pays pris en charge par la bibliothèque [`holidays`](https://github.com/vacanza/holidays) (la même que les intégrations officielles *Holiday* et *Workday*). La **France** reste la valeur par défaut.
+2. **Subdivision** (facultative) — proposée uniquement si le pays en a (par exemple un Land allemand, un État américain, un territoire d’outre-mer français). Sans subdivision, seuls les jours fériés nationaux du pays sont suivis.
+3. **Langue des noms de fêtes** — proposée si `holidays` la fournit pour ce pays. Par défaut, la langue de Home Assistant est utilisée lorsqu’elle est supportée, sinon la langue par défaut du pays. Pour la France, la langue par défaut reste le français afin de conserver les libellés historiques.
+
+Les installations déjà présentes sont migrées automatiquement vers la France, sans perdre l’option Alsace-Moselle. Le nom de l’appareil et les identifiants des entités ne changent pas.
+
+---
+
+## ➕ Option Alsace-Moselle (France)
+
+Lorsque le pays est la **France**, une option **Alsace-Moselle**, désactivée par défaut, ajoute les deux jours fériés observés dans le Bas-Rhin, le Haut-Rhin et la Moselle :
 
 | Date | Jour férié |
 |------|------------|
 | Vendredi Saint (2 jours avant Pâques) | Vendredi Saint |
 | 26 décembre | Saint Étienne |
 
-Cette option peut être activée à l’installation, ou plus tard via **Paramètres > Appareils & services > Jour Férié > Configurer**. L’entrée est rechargée automatiquement après modification. Le Vendredi Saint est également recalculé chaque année.
+Cette option s’appuie sur le code de subdivision officiel de la bibliothèque `holidays` (`6AE` / `57` sur les versions récentes, `GES` sur les versions livrées avec Home Assistant 2024.6). Elle n’est proposée que pour la France et s’applique lorsqu’aucune autre subdivision n’est sélectionnée. Elle peut être activée à l’installation ou plus tard dans les options ; l’entrée est rechargée automatiquement. Le Vendredi Saint est recalculé chaque année.
 
 ---
 
@@ -230,7 +250,7 @@ Cette option peut être activée à l’installation, ou plus tard via **Paramè
 | **Suivi bugs**    | [Issues](https://github.com/XAV59213/jourferier/issues) |
 | **Version**       | `1.2.9`                            |
 | **Compatibilité** | Home Assistant ≥ `2024.6.0`       |
-| **Dépendances**   | Aucune                             |
+| **Dépendances**   | `holidays>=0.50` (déjà utilisée par Home Assistant) |
 
 ---
 

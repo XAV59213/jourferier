@@ -249,7 +249,7 @@ Cette option s’appuie sur le code de subdivision officiel de la bibliothèque 
 | **Propriétaire**  | [@XAV59213](https://github.com/XAV59213) |
 | **Code source**   | [GitHub](https://github.com/XAV59213/jourferier) |
 | **Suivi bugs**    | [Issues](https://github.com/XAV59213/jourferier/issues) |
-| **Version**       | `1.2.9`                            |
+| **Version**       | `1.3.0`                            |
 | **Compatibilité** | Home Assistant ≥ `2024.6.0`       |
 | **Dépendances**   | `holidays>=0.50` (déjà utilisée par Home Assistant) |
 

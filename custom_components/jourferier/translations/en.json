@@ -2,9 +2,18 @@
   "config": {
     "step": {
       "user": {
-        "title": "French Public Holiday",
-        "description": "Configure the French public holiday sensor.",
+        "title": "Jour Férié",
+        "description": "Select the country whose public holidays should be tracked. France is the default, with the usual French holiday names.",
         "data": {
+          "country": "Country"
+        }
+      },
+      "details": {
+        "title": "Jour Férié",
+        "description": "Optionally choose a subdivision (state, region or overseas territory) and, when the holidays library provides them, the language of holiday names. The Alsace-Moselle option is only available for France.",
+        "data": {
+          "subdivision": "Subdivision (optional)",
+          "language": "Holiday names language",
           "alsace_moselle": "Include Alsace-Moselle public holidays (Good Friday and St. Stephen's Day)"
         }
       }
@@ -53,9 +62,18 @@
   "options": {
     "step": {
       "init": {
-        "title": "French Public Holiday",
-        "description": "Choose whether to include the two additional public holidays observed in Alsace-Moselle.",
+        "title": "Jour Férié",
+        "description": "Select the country whose public holidays should be tracked.",
         "data": {
+          "country": "Country"
+        }
+      },
+      "details": {
+        "title": "Jour Férié",
+        "description": "Optionally choose a subdivision and, when available, the language of holiday names. The Alsace-Moselle option is only available for France.",
+        "data": {
+          "subdivision": "Subdivision (optional)",
+          "language": "Holiday names language",
           "alsace_moselle": "Include Alsace-Moselle public holidays (Good Friday and St. Stephen's Day)"
         }
       }

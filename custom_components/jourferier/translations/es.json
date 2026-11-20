@@ -1,0 +1,82 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Jour Férié",
+        "description": "Seleccione el país cuyos días festivos deben seguirse. Francia es el valor predeterminado, con los nombres habituales en francés.",
+        "data": {
+          "country": "País"
+        }
+      },
+      "details": {
+        "title": "Jour Férié",
+        "description": "Opcionalmente, elija una subdivisión (estado, región o territorio de ultramar) y, cuando la biblioteca holidays las ofrezca, el idioma de los nombres de las fiestas. La opción Alsace-Moselle solo está disponible para Francia.",
+        "data": {
+          "subdivision": "Subdivisión (opcional)",
+          "language": "Idioma de los nombres de las fiestas",
+          "alsace_moselle": "Incluir los días festivos de Alsace-Moselle (Viernes Santo y San Esteban)"
+        }
+      }
+    },
+    "abort": {
+      "single_instance_only": "Solo se permite una instancia de esta integración."
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "est_ferie": {
+        "name": "Es un día festivo"
+      },
+      "demain_est_ferie": {
+        "name": "Mañana es un día festivo"
+      }
+    },
+    "sensor": {
+      "jour_ferie": {
+        "name": "Día festivo",
+        "state": {
+          "aucun": "Ningún día festivo"
+        },
+        "state_attributes": {
+          "holiday_name": {
+            "name": "Nombre del día festivo"
+          },
+          "date": {
+            "name": "Fecha"
+          },
+          "next_holiday": {
+            "name": "Próximo día festivo"
+          },
+          "days_until": {
+            "name": "Días restantes"
+          }
+        }
+      }
+    },
+    "calendar": {
+      "jour_ferie_calendar": {
+        "name": "Calendario de días festivos"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Jour Férié",
+        "description": "Seleccione el país cuyos días festivos deben seguirse.",
+        "data": {
+          "country": "País"
+        }
+      },
+      "details": {
+        "title": "Jour Férié",
+        "description": "Opcionalmente, elija una subdivisión y, cuando esté disponible, el idioma de los nombres de las fiestas. La opción Alsace-Moselle solo está disponible para Francia.",
+        "data": {
+          "subdivision": "Subdivisión (opcional)",
+          "language": "Idioma de los nombres de las fiestas",
+          "alsace_moselle": "Incluir los días festivos de Alsace-Moselle (Viernes Santo y San Esteban)"
+        }
+      }
+    }
+  }
+}

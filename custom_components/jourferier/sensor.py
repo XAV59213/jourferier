@@ -6,7 +6,7 @@ from .const import (
     SENSOR_NAME, SENSOR_UNIQUE_ID,
     ATTR_HOLIDAY_NAME, ATTR_DATE, ATTR_NEXT_HOLIDAY, ATTR_DAYS_UNTIL,
     ATTR_PROCHAIN_PONT_POTENTIEL, get_device_info, get_holidays,
-    get_next_potential_bridge, is_alsace_moselle,
+    get_next_potential_bridge, holiday_settings_from_entry,
 )
 
 _LOGGER = logging.getLogger(__name__)
@@ -26,13 +26,13 @@ class JourFerieSensor(SensorEntity):
 
     def update(self):
         today = date.today()
-        alsace = is_alsace_moselle(self._entry)
-        holidays = get_holidays(today.year, alsace)
+        settings = holiday_settings_from_entry(self._entry)
+        holidays = get_holidays(today.year, **settings)
         today_holiday = holidays.get(today)
         self._state = today_holiday if today_holiday else "aucun"
 
         # Inclure aussi l'année suivante pour calcul anticipé
-        all_holidays = {**holidays, **get_holidays(today.year + 1, alsace)}
+        all_holidays = {**holidays, **get_holidays(today.year + 1, **settings)}
         next_holiday = None
         days_until = None
         for holiday_date in sorted(all_holidays):
@@ -41,7 +41,7 @@ class JourFerieSensor(SensorEntity):
                 days_until = (holiday_date - today).days
                 break
 
-        next_potential_bridge = get_next_potential_bridge(today, alsace)
+        next_potential_bridge = get_next_potential_bridge(today, **settings)
 
         self._attributes = {
             ATTR_HOLIDAY_NAME: self._state,

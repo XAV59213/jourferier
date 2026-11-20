@@ -4,7 +4,7 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ConfigEntryNotReady
 from homeassistant.helpers import config_validation as cv
-from .const import DOMAIN
+from .const import CONF_COUNTRY, CONF_LANGUAGE, DEFAULT_COUNTRY, DOMAIN
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -16,6 +16,29 @@ CONFIG_SCHEMA = cv.config_entry_only_config_schema(DOMAIN)
 async def async_setup(hass: HomeAssistant, config: dict) -> bool:
     """Configurer le composant."""
     _LOGGER.info("Initialisation de %s", DOMAIN)
+    return True
+
+async def async_migrate_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """Migrer une entrée existante sans casser le comportement actuel.
+
+    Version 1 → 2 : le pays absent devient la France, l'option Alsace-Moselle
+    déjà enregistrée est conservée, la langue des libellés FR est figée à
+    « fr » pour garder les noms historiques.
+    """
+    if entry.version > 2:
+        _LOGGER.error("Version d'entrée inconnue : %s", entry.version)
+        return False
+
+    if entry.version < 2:
+        options = dict(entry.options)
+        data = dict(entry.data)
+        if CONF_COUNTRY not in options:
+            options[CONF_COUNTRY] = data.get(CONF_COUNTRY, DEFAULT_COUNTRY)
+        if options.get(CONF_COUNTRY) == DEFAULT_COUNTRY and CONF_LANGUAGE not in options:
+            options[CONF_LANGUAGE] = "fr"
+        hass.config_entries.async_update_entry(entry, data=data, options=options, version=2)
+        _LOGGER.info("Entrée %s migrée vers la version 2 (pays=%s)", entry.entry_id, options[CONF_COUNTRY])
+
     return True
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:

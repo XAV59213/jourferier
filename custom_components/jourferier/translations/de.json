@@ -1,0 +1,82 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Jour Férié",
+        "description": "Wählen Sie das Land, dessen gesetzliche Feiertage verfolgt werden sollen. Frankreich ist die Vorgabe, mit den üblichen französischen Feiertagsbezeichnungen.",
+        "data": {
+          "country": "Land"
+        }
+      },
+      "details": {
+        "title": "Jour Férié",
+        "description": "Optional können Sie eine Untergliederung (Bundesland, Region oder Überseegebiet) wählen und, sofern die holidays-Bibliothek sie anbietet, die Sprache der Feiertagsnamen. Die Option Alsace-Moselle ist nur für Frankreich verfügbar.",
+        "data": {
+          "subdivision": "Untergliederung (optional)",
+          "language": "Sprache der Feiertagsnamen",
+          "alsace_moselle": "Feiertage von Alsace-Moselle einbeziehen (Karfreitag und Stephanstag)"
+        }
+      }
+    },
+    "abort": {
+      "single_instance_only": "Es ist nur eine Instanz dieser Integration zulässig."
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "est_ferie": {
+        "name": "Ist ein Feiertag"
+      },
+      "demain_est_ferie": {
+        "name": "Morgen ist ein Feiertag"
+      }
+    },
+    "sensor": {
+      "jour_ferie": {
+        "name": "Feiertag",
+        "state": {
+          "aucun": "Kein Feiertag"
+        },
+        "state_attributes": {
+          "holiday_name": {
+            "name": "Name des Feiertags"
+          },
+          "date": {
+            "name": "Datum"
+          },
+          "next_holiday": {
+            "name": "Nächster Feiertag"
+          },
+          "days_until": {
+            "name": "Verbleibende Tage"
+          }
+        }
+      }
+    },
+    "calendar": {
+      "jour_ferie_calendar": {
+        "name": "Feiertagskalender"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Jour Férié",
+        "description": "Wählen Sie das Land, dessen gesetzliche Feiertage verfolgt werden sollen.",
+        "data": {
+          "country": "Land"
+        }
+      },
+      "details": {
+        "title": "Jour Férié",
+        "description": "Optional können Sie eine Untergliederung und, sofern verfügbar, die Sprache der Feiertagsnamen wählen. Die Option Alsace-Moselle ist nur für Frankreich verfügbar.",
+        "data": {
+          "subdivision": "Untergliederung (optional)",
+          "language": "Sprache der Feiertagsnamen",
+          "alsace_moselle": "Feiertage von Alsace-Moselle einbeziehen (Karfreitag und Stephanstag)"
+        }
+      }
+    }
+  }
+}

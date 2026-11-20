@@ -3,8 +3,17 @@
     "step": {
       "user": {
         "title": "Jour Férié",
-        "description": "Configurer le capteur pour les jours fériés.",
+        "description": "Choisissez le pays dont les jours fériés doivent être suivis. La France est proposée par défaut, avec les libellés habituels.",
         "data": {
+          "country": "Pays"
+        }
+      },
+      "details": {
+        "title": "Jour Férié",
+        "description": "Vous pouvez préciser une subdivision (Land, région ou territoire d'outre-mer) et, si la bibliothèque holidays le propose, la langue des noms de fêtes. L'option Alsace-Moselle n'est proposée que pour la France.",
+        "data": {
+          "subdivision": "Subdivision (facultative)",
+          "language": "Langue des noms de fêtes",
           "alsace_moselle": "Inclure les jours fériés d'Alsace-Moselle (Vendredi Saint et Saint Étienne)"
         }
       }
@@ -54,8 +63,17 @@
     "step": {
       "init": {
         "title": "Jour Férié",
-        "description": "Choisissez d'inclure les deux jours fériés supplémentaires observés en Alsace-Moselle (Bas-Rhin, Haut-Rhin et Moselle).",
+        "description": "Choisissez le pays dont les jours fériés doivent être suivis.",
         "data": {
+          "country": "Pays"
+        }
+      },
+      "details": {
+        "title": "Jour Férié",
+        "description": "Vous pouvez préciser une subdivision et, si elle est proposée, la langue des noms de fêtes. L'option Alsace-Moselle n'est disponible que pour la France.",
+        "data": {
+          "subdivision": "Subdivision (facultative)",
+          "language": "Langue des noms de fêtes",
           "alsace_moselle": "Inclure les jours fériés d'Alsace-Moselle (Vendredi Saint et Saint Étienne)"
         }
       }

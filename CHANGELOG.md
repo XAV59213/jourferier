@@ -1,6 +1,6 @@
 # Changelog
 
-## Non publié
+## 1.2.9 - 2026-11-20
 
 - Ajout d'une option **Alsace-Moselle** (désactivée par défaut) pour inclure le Vendredi Saint et la Saint Étienne, disponible à l'installation et modifiable ensuite dans les options de l'intégration.
 - Précision dans le README : les dates de Pâques, de l'Ascension et de la Pentecôte sont recalculées chaque année.

@@ -1,0 +1,82 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Jour Férié",
+        "description": "Selecteer het land waarvan de feestdagen moeten worden gevolgd. Frankrijk is de standaard, met de gebruikelijke Franse feestdagnamen.",
+        "data": {
+          "country": "Land"
+        }
+      },
+      "details": {
+        "title": "Jour Férié",
+        "description": "Kies optioneel een onderverdeling (deelstaat, regio of overzees gebied) en, als de holidays-bibliotheek die aanbiedt, de taal van de feestdagnamen. De optie Alsace-Moselle is alleen beschikbaar voor Frankrijk.",
+        "data": {
+          "subdivision": "Onderverdeling (optioneel)",
+          "language": "Taal van de feestdagnamen",
+          "alsace_moselle": "Feestdagen van Alsace-Moselle toevoegen (Goede Vrijdag en Sint-Stefanus)"
+        }
+      }
+    },
+    "abort": {
+      "single_instance_only": "Er is slechts één instantie van deze integratie toegestaan."
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "est_ferie": {
+        "name": "Het is een feestdag"
+      },
+      "demain_est_ferie": {
+        "name": "Morgen is het een feestdag"
+      }
+    },
+    "sensor": {
+      "jour_ferie": {
+        "name": "Feestdag",
+        "state": {
+          "aucun": "Geen feestdag"
+        },
+        "state_attributes": {
+          "holiday_name": {
+            "name": "Naam van de feestdag"
+          },
+          "date": {
+            "name": "Datum"
+          },
+          "next_holiday": {
+            "name": "Volgende feestdag"
+          },
+          "days_until": {
+            "name": "Resterende dagen"
+          }
+        }
+      }
+    },
+    "calendar": {
+      "jour_ferie_calendar": {
+        "name": "Feestdagenkalender"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Jour Férié",
+        "description": "Selecteer het land waarvan de feestdagen moeten worden gevolgd.",
+        "data": {
+          "country": "Land"
+        }
+      },
+      "details": {
+        "title": "Jour Férié",
+        "description": "Kies optioneel een onderverdeling en, indien beschikbaar, de taal van de feestdagnamen. De optie Alsace-Moselle is alleen beschikbaar voor Frankrijk.",
+        "data": {
+          "subdivision": "Onderverdeling (optioneel)",
+          "language": "Taal van de feestdagnamen",
+          "alsace_moselle": "Feestdagen van Alsace-Moselle toevoegen (Goede Vrijdag en Sint-Stefanus)"
+        }
+      }
+    }
+  }
+}

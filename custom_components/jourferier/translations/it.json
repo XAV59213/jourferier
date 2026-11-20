@@ -1,0 +1,82 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Jour Férié",
+        "description": "Seleziona il paese di cui seguire i giorni festivi. La Francia è l'impostazione predefinita, con i nomi francesi usuali.",
+        "data": {
+          "country": "Paese"
+        }
+      },
+      "details": {
+        "title": "Jour Férié",
+        "description": "Puoi scegliere facoltativamente una suddivisione (Land, regione o territorio d'oltremare) e, se la libreria holidays le propone, la lingua dei nomi delle festività. L'opzione Alsace-Moselle è disponibile solo per la Francia.",
+        "data": {
+          "subdivision": "Suddivisione (facoltativa)",
+          "language": "Lingua dei nomi delle festività",
+          "alsace_moselle": "Includi i giorni festivi di Alsace-Moselle (Venerdì Santo e Santo Stefano)"
+        }
+      }
+    },
+    "abort": {
+      "single_instance_only": "È consentita una sola istanza di questa integrazione."
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "est_ferie": {
+        "name": "È un giorno festivo"
+      },
+      "demain_est_ferie": {
+        "name": "Domani è un giorno festivo"
+      }
+    },
+    "sensor": {
+      "jour_ferie": {
+        "name": "Giorno festivo",
+        "state": {
+          "aucun": "Nessun giorno festivo"
+        },
+        "state_attributes": {
+          "holiday_name": {
+            "name": "Nome del giorno festivo"
+          },
+          "date": {
+            "name": "Data"
+          },
+          "next_holiday": {
+            "name": "Prossimo giorno festivo"
+          },
+          "days_until": {
+            "name": "Giorni rimanenti"
+          }
+        }
+      }
+    },
+    "calendar": {
+      "jour_ferie_calendar": {
+        "name": "Calendario dei giorni festivi"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Jour Férié",
+        "description": "Seleziona il paese di cui seguire i giorni festivi.",
+        "data": {
+          "country": "Paese"
+        }
+      },
+      "details": {
+        "title": "Jour Férié",
+        "description": "Puoi scegliere facoltativamente una suddivisione e, se disponibile, la lingua dei nomi delle festività. L'opzione Alsace-Moselle è disponibile solo per la Francia.",
+        "data": {
+          "subdivision": "Suddivisione (facoltativa)",
+          "language": "Lingua dei nomi delle festività",
+          "alsace_moselle": "Includi i giorni festivi di Alsace-Moselle (Venerdì Santo e Santo Stefano)"
+        }
+      }
+    }
+  }
+}

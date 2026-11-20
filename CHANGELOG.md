@@ -6,6 +6,7 @@
 - Option **Alsace-Moselle** conservée pour la France ; les installations existantes sont migrées sans casse (pays absent = France, réglage Alsace-Moselle conservé).
 - Sélection facultative de la langue des noms de fêtes lorsque `holidays` la propose (par défaut la langue de Home Assistant si elle est supportée ; français pour la France).
 - Dépendance `holidays>=0.50` ajoutée au manifeste, compatible avec Home Assistant 2024.6 (0.50/0.51) jusqu'au pin actuel du noyau (0.107).
+- Interface traduite en allemand, anglais, espagnol, français, italien, néerlandais et portugais.
 
 
 ## 1.2.9 - 2026-11-20

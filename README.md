@@ -52,6 +52,7 @@ Affichez si **aujourd’hui ou demain est un jour férié** via des capteurs et 
 
 - 🧩 **Configuration simplifiée**
   - Ajout et modification via l’interface Home Assistant (UI)
+  - Interface disponible en allemand, anglais, espagnol, français, italien, néerlandais et portugais
 
 ---
 
@@ -244,7 +245,7 @@ Cette option s’appuie sur le code de subdivision officiel de la bibliothèque 
 | Élément          | Détail                             |
 |------------------|------------------------------------|
 | **Domaine**       | `jourferier`                      |
-| **Configuration** | Interface graphique (`config_flow`) |
+| **Configuration** | Interface graphique (`config_flow`), traduite en DE, EN, ES, FR, IT, NL et PT |
 | **Propriétaire**  | [@XAV59213](https://github.com/XAV59213) |
 | **Code source**   | [GitHub](https://github.com/XAV59213/jourferier) |
 | **Suivi bugs**    | [Issues](https://github.com/XAV59213/jourferier/issues) |

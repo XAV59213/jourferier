@@ -38,7 +38,12 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         _LOGGER.error("Erreur lors de la configuration des plateformes : %s", e)
         raise ConfigEntryNotReady from e
 
+    entry.async_on_unload(entry.add_update_listener(async_reload_entry))
     return True
+
+async def async_reload_entry(hass: HomeAssistant, entry: ConfigEntry) -> None:
+    """Recharger l'entrée lorsque les options changent."""
+    await hass.config_entries.async_reload(entry.entry_id)
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Décharger une entrée de configuration."""

@@ -3,7 +3,10 @@
     "step": {
       "user": {
         "title": "Jour Férié",
-        "description": "Configure the French public holiday sensor."
+        "description": "Configure the French public holiday sensor.",
+        "data": {
+          "alsace_moselle": "Include Alsace-Moselle public holidays (Good Friday and St. Stephen's Day)"
+        }
       }
     },
     "abort": {
@@ -17,6 +20,17 @@
       },
       "demain_est_ferie": {
         "name": "Tomorrow is a public holiday"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Jour Férié",
+        "description": "Choose whether to include the two additional public holidays observed in Alsace-Moselle.",
+        "data": {
+          "alsace_moselle": "Include Alsace-Moselle public holidays (Good Friday and St. Stephen's Day)"
+        }
       }
     }
   }

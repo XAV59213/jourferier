@@ -6,7 +6,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.util import dt as dt_util
-from .const import DOMAIN, get_holidays, HOLIDAY_DESCRIPTIONS
+from .const import DOMAIN, get_holidays, HOLIDAY_DESCRIPTIONS, is_alsace_moselle
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -43,7 +43,7 @@ class JourFerieCalendar(CalendarEntity):
         """Générer les événements pour une plage d'années."""
         events = []
         for year in range(start_year, end_year + 1):
-            holidays = get_holidays(year)
+            holidays = get_holidays(year, is_alsace_moselle(self._config_entry))
             for holiday_date, name in holidays.items():
                 try:
                     event_date = datetime.combine(

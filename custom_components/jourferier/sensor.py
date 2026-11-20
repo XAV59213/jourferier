@@ -3,40 +3,36 @@ import logging
 from datetime import date
 from homeassistant.components.sensor import SensorEntity
 from .const import (
-    DOMAIN, SENSOR_NAME, SENSOR_UNIQUE_ID,
+    SENSOR_NAME, SENSOR_UNIQUE_ID,
     ATTR_HOLIDAY_NAME, ATTR_DATE, ATTR_NEXT_HOLIDAY, ATTR_DAYS_UNTIL,
-    ATTR_PROCHAIN_PONT_POTENTIEL, get_holidays, get_next_potential_bridge,
+    ATTR_PROCHAIN_PONT_POTENTIEL, get_device_info, get_holidays,
+    get_next_potential_bridge, is_alsace_moselle,
 )
 
 _LOGGER = logging.getLogger(__name__)
 
 async def async_setup_entry(hass, entry, async_add_entities):
-    async_add_entities([JourFerieSensor()])
+    async_add_entities([JourFerieSensor(entry)])
 
 class JourFerieSensor(SensorEntity):
-    def __init__(self):
+    def __init__(self, entry):
+        self._entry = entry
         self._attr_name = SENSOR_NAME
         self._attr_unique_id = SENSOR_UNIQUE_ID
         self._attr_icon = "mdi:calendar-star"
         self._state = None
         self._attributes = {}
-        self._attr_device_info = {
-            "identifiers": {(DOMAIN, "jourferier")},
-            "name": "Jour Férié",
-            "manufacturer": "xav59213",
-            "model": "Capteur jours fériés dynamique",
-            "sw_version": "1.0.6",
-            "configuration_url": "https://github.com/xav59213/xav59213-jour-ferie",
-        }
+        self._attr_device_info = get_device_info()
 
     def update(self):
         today = date.today()
-        holidays = get_holidays(today.year)
+        alsace = is_alsace_moselle(self._entry)
+        holidays = get_holidays(today.year, alsace)
         today_holiday = holidays.get(today)
         self._state = today_holiday if today_holiday else "aucun"
 
         # Inclure aussi l'année suivante pour calcul anticipé
-        all_holidays = {**holidays, **get_holidays(today.year + 1)}
+        all_holidays = {**holidays, **get_holidays(today.year + 1, alsace)}
         next_holiday = None
         days_until = None
         for holiday_date in sorted(all_holidays):
@@ -45,7 +41,7 @@ class JourFerieSensor(SensorEntity):
                 days_until = (holiday_date - today).days
                 break
 
-        next_potential_bridge = get_next_potential_bridge(today)
+        next_potential_bridge = get_next_potential_bridge(today, alsace)
 
         self._attributes = {
             ATTR_HOLIDAY_NAME: self._state,

@@ -1,5 +1,12 @@
 # Changelog
 
+## Non publié
+
+- Ajout d'une option **Alsace-Moselle** (désactivée par défaut) pour inclure le Vendredi Saint et la Saint Étienne, disponible à l'installation et modifiable ensuite dans les options de l'intégration.
+- Précision dans le README : les dates de Pâques, de l'Ascension et de la Pentecôte sont recalculées chaque année.
+- Correction : le capteur utilise désormais `get_device_info()` (version et lien du dépôt à jour), au lieu d'informations d'appareil obsolètes.
+
+
 ## 1.2.8 - 2026-11-07
 
 - Nettoyage suite à la revue de Frenck : suppression de la déclaration et de la documentation du service obsolète `jourferier.create_card`, déjà retiré du code.

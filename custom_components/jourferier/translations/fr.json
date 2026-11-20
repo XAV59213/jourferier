@@ -3,7 +3,10 @@
     "step": {
       "user": {
         "title": "Jour Férié",
-        "description": "Configurer le capteur pour les jours fériés."
+        "description": "Configurer le capteur pour les jours fériés.",
+        "data": {
+          "alsace_moselle": "Inclure les jours fériés d'Alsace-Moselle (Vendredi Saint et Saint Étienne)"
+        }
       }
     },
     "abort": {
@@ -44,6 +47,17 @@
     "calendar": {
       "jour_ferie_calendar": {
         "name": "Calendrier des Jours Fériés"
+      }
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Jour Férié",
+        "description": "Choisissez d'inclure les deux jours fériés supplémentaires observés en Alsace-Moselle (Bas-Rhin, Haut-Rhin et Moselle).",
+        "data": {
+          "alsace_moselle": "Inclure les jours fériés d'Alsace-Moselle (Vendredi Saint et Saint Étienne)"
+        }
       }
     }
   }

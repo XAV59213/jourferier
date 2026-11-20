@@ -68,7 +68,7 @@ Affichez si **aujourd’hui ou demain est un jour férié** via des capteurs et 
 4. Rechercher et installer **Jour Férié**
 5. Redémarrer Home Assistant
 6. Aller dans **Paramètres > Appareils & Services > Ajouter une intégration**
-7. Sélectionner **Jour Férié** (aucune configuration requise)
+7. Sélectionner **Jour Férié** (l’option Alsace-Moselle est proposée, désactivée par défaut)
 
 ### 📂 Installation manuelle
 
@@ -201,6 +201,21 @@ Si la carte n'apparaît pas : vider le cache du navigateur, ou ajouter à la mai
 | 1er novembre | Toussaint              |
 | 11 novembre  | Armistice 1918         |
 | 25 décembre  | Noël                   |
+
+Les dates mobiles (**Lundi de Pâques**, **Ascension**, **Lundi de Pentecôte**) sont recalculées automatiquement chaque année, à partir de la date de Pâques.
+
+---
+
+## ➕ Option Alsace-Moselle
+
+Par défaut, l’intégration se limite aux jours fériés nationaux ci-dessus. Une option **Alsace-Moselle**, désactivée par défaut, ajoute les deux jours fériés observés dans le Bas-Rhin, le Haut-Rhin et la Moselle :
+
+| Date | Jour férié |
+|------|------------|
+| Vendredi Saint (2 jours avant Pâques) | Vendredi Saint |
+| 26 décembre | Saint Étienne |
+
+Cette option peut être activée à l’installation, ou plus tard via **Paramètres > Appareils & services > Jour Férié > Configurer**. L’entrée est rechargée automatiquement après modification. Le Vendredi Saint est également recalculé chaque année.
 
 ---
 

@@ -2,6 +2,7 @@
 from datetime import date, timedelta
 
 DOMAIN = "jourferier"
+CONF_ALSACE_MOSELLE = "alsace_moselle"
 SENSOR_NAME = "Jour Férié"
 SENSOR_UNIQUE_ID = f"{DOMAIN}_sensor"
 ATTR_HOLIDAY_NAME = "holiday_name"
@@ -27,8 +28,18 @@ def get_device_info() -> dict:
     }
 
 
-def get_holidays(year: int) -> dict[date, str]:
-    """Retourne un dictionnaire de dates de jours fériés pour l’année spécifiée."""
+def is_alsace_moselle(entry) -> bool:
+    """Retourne True si l'option Alsace-Moselle est activée."""
+    return bool(entry.options.get(CONF_ALSACE_MOSELLE, False))
+
+
+def get_holidays(year: int, alsace_moselle: bool = False) -> dict[date, str]:
+    """Retourne un dictionnaire de dates de jours fériés pour l’année spécifiée.
+
+    Les dates mobiles (Lundi de Pâques, Ascension, Lundi de Pentecôte, et
+    le Vendredi Saint si l'option Alsace-Moselle est activée) sont calculées
+    chaque année à partir de la date de Pâques (algorithme de Meeus/Jones/Butcher).
+    """
     a = year % 19
     b = year // 100
     c = year % 100
@@ -45,7 +56,7 @@ def get_holidays(year: int) -> dict[date, str]:
     day = ((h + l - 7 * m + 114) % 31) + 1
     easter_sunday = date(year, month, day)
 
-    return {
+    holidays = {
         date(year, 1, 1): "Jour de l’An",
         easter_sunday + timedelta(days=1): "Lundi de Pâques",
         date(year, 5, 1): "Fête du Travail",
@@ -58,21 +69,27 @@ def get_holidays(year: int) -> dict[date, str]:
         date(year, 11, 11): "Armistice 1918",
         date(year, 12, 25): "Noël",
     }
+    if alsace_moselle:
+        holidays[easter_sunday - timedelta(days=2)] = "Vendredi Saint"
+        holidays[date(year, 12, 26)] = "Saint Étienne"
+    return holidays
 
 
-def is_day_off(target_date: date) -> bool:
+def is_day_off(target_date: date, alsace_moselle: bool = False) -> bool:
     """Retourne True si la date est un week-end ou un jour férié."""
-    return target_date.weekday() >= 5 or target_date in get_holidays(target_date.year)
+    return target_date.weekday() >= 5 or target_date in get_holidays(
+        target_date.year, alsace_moselle
+    )
 
 
-def get_next_potential_bridge(today: date) -> date | None:
+def get_next_potential_bridge(today: date, alsace_moselle: bool = False) -> date | None:
     """Retourne la date du prochain jour ouvré entre deux jours de repos."""
     for offset in range(1, 367):
         pont_potentiel = today + timedelta(days=offset)
         if (
-            not is_day_off(pont_potentiel)
-            and is_day_off(pont_potentiel - timedelta(days=1))
-            and is_day_off(pont_potentiel + timedelta(days=1))
+            not is_day_off(pont_potentiel, alsace_moselle)
+            and is_day_off(pont_potentiel - timedelta(days=1), alsace_moselle)
+            and is_day_off(pont_potentiel + timedelta(days=1), alsace_moselle)
         ):
             return pont_potentiel
 
@@ -91,6 +108,8 @@ HOLIDAY_DESCRIPTIONS = {
     "Toussaint": "Bonne Toussaint ! Un moment pour honorer les saints et les défunts.",
     "Armistice 1918": "Hommage aux héros de 1918 ! Une journée de recueillement.",
     "Noël": "Joyeux Noël ! Une fête chaleureuse pour partager amour et cadeaux !",
+    "Vendredi Saint": "Vendredi Saint : une journée de recueillement, fériée en Alsace-Moselle.",
+    "Saint Étienne": "Bonne fête de la Saint-Étienne ! Un jour férié observé en Alsace-Moselle.",
 }
 
 # Carte Lovelace native

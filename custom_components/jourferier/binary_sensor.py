@@ -6,12 +6,12 @@ from datetime import timedelta
 from homeassistant.components.binary_sensor import BinarySensorEntity
 from homeassistant.util import dt as dt_util
 
-from .const import ATTR_DATE, ATTR_HOLIDAY_NAME, DOMAIN, get_device_info, get_holidays
+from .const import ATTR_DATE, ATTR_HOLIDAY_NAME, DOMAIN, get_device_info, get_holidays, is_alsace_moselle
 
 
 async def async_setup_entry(hass, entry, async_add_entities):
     """Configurer la plateforme binary_sensor."""
-    async_add_entities([EstFerieBinarySensor(), DemainFerieBinarySensor()])
+    async_add_entities([EstFerieBinarySensor(entry), DemainFerieBinarySensor(entry)])
 
 
 class _HolidayBinarySensor(BinarySensorEntity):
@@ -20,14 +20,15 @@ class _HolidayBinarySensor(BinarySensorEntity):
     _attr_has_entity_name = True
     _offset_days = 0
 
-    def __init__(self) -> None:
+    def __init__(self, entry) -> None:
+        self._entry = entry
         self._attr_device_info = get_device_info()
         self._attr_is_on = False
         self._attr_extra_state_attributes = {}
 
     def update(self) -> None:
         target = dt_util.now().date() + timedelta(days=self._offset_days)
-        holidays = get_holidays(target.year)
+        holidays = get_holidays(target.year, is_alsace_moselle(self._entry))
         self._attr_is_on = target in holidays
         self._attr_extra_state_attributes = {
             ATTR_HOLIDAY_NAME: holidays.get(target, "Aucun"),

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.3.1 - 2026-11-20
+
+- README : ajout du bouton **Discuter sur Forum Domotique** et du badge cliquable **GitHub Stars**.
+- Aucun changement fonctionnel.
+
+
 ## 1.3.0 - 2026-11-20
 
 - Choix du **pays** (et d'une subdivision si elle existe) via la bibliothèque Python `holidays`, déjà utilisée par Home Assistant. La France reste le défaut, avec les libellés historiques.

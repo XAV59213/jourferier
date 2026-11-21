@@ -9,7 +9,7 @@
 
 [![Discuter sur Forum Domotique](docs/badges/forum-domotique-badge-40.svg)](https://forumdomotique.com/forums/topic/194-%F0%9F%87%AB%F0%9F%87%B7-int%C3%A9gration-ha-jour-f%C3%A9ri%C3%A9-capteur-de-jours-f%C3%A9ri%C3%A9s/)
 
-[![Site Forum Domotique](https://img.shields.io/badge/Site-Forum%20Domotique-2ea44f?logo=github)](https://xav59213.github.io/forumdomotique/)
+[![Découvre ma vitrine](docs/badges/vitrine-badge-40.svg)](https://xav59213.github.io/forumdomotique/)
 
 [![Buy Me A Coffee](https://img.buymeacoffee.com/button-api/?text=xav59213&emoji=&slug=xav59213&button_colour=5F7FFF&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00)](https://www.buymeacoffee.com/xav59213)
 
